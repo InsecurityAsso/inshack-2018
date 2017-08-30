@@ -54,11 +54,10 @@
 #define EO_RESULT_SZ    3*EO_SZ
 #define EO_RESULT                                                              \
 {                                                                              \
-    0x8a,0x8c,0x8e,0x90,0x94,0x98,0x9c,0xa0,                                   \
-    0x80,0x80,0x80,0x80,0x80,0x80,0x8a,0x12,                                   \
-    0x80,0x80,0x80,0x80,0x80,0x80,0x8a,0x12,                                   \
+    0x68,0x02,0x98,0xd6,0xc2,0x82,0xf8,0xb6,                                   \
+    0x9a,0x68,0x52,0xef,0xa3,0x90,0xd0,0x84,                                   \
+    0xc4,0xc6,0x03,0x53,0x6d,0x3b,0x6b,0xd7,                                   \
 }
-
 //------------------------------------------------------------------------------
 // MACROS
 //------------------------------------------------------------------------------
@@ -131,7 +130,7 @@ void compute(void)
             idxFS = i*EO_SZ+j;
   /* FT */  gCOMPUT[i] += gF[idxFT] + gT[idxFT];
   /* FS */  gCOMPUT[i+EO_SZ] += gF[idxFS] + gS[idxFS];
-  /* TS */  gCOMPUT[i+2*EO_SZ] += gT[idxFS] + gS[idxFT];
+  /* TS */  gCOMPUT[i+2*EO_SZ] += gT[idxFT] + gS[idxFS];
         }
     }
 }
