@@ -108,7 +108,7 @@ int main(int argc, char **argv)
         exit(1);
     }
     /* update log */
-    printf("\ncmd: %s\n", gcmd); /* debug */
+    //printf("\ncmd: %s\n", gcmd); /* debug */
     system(gcmd); /* VULN here */
     /* write output data */
     write(STDOUT_FILENO, godat, osz);

@@ -21,3 +21,9 @@ test: cipher
 	./cipher d key.bin cipher.txt
 	diff -q cipher.txt cipher.ref &&cat cipher.txt &&echo "TEST PASSED!"
 	rm cipher.txt cipher.ref
+
+chall:
+	head -c 16 /dev/urandom > key.bin
+	cat emergency_override.c > emergency_override.enc
+	./crypt e key.bin emergency_override.enc
+	zip stage_3_storage.zip crypt key.bin emergency_override.enc

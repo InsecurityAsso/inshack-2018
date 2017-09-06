@@ -1,9 +1,10 @@
+
 CC=gcc
 CC_FLAGS=-O3
 
-.PHONY: eo
+.PHONY: emergency_override
 
-all: eo
+all: emergency_override
 
-eo: emergency_override.c
+emergency_override: emergency_override.c
 	$(CC) $(CC_FLAGS) -o $@ $<
