@@ -21,6 +21,7 @@ from threading    import Thread
 #-------------------------------------------------------------------------------
 # CONFIGURATION
 #-------------------------------------------------------------------------------
+EO_SZ = 4
 HOST = 'localhost'
 PORT = 12042
 FLAG = 'flag{...test...}'
@@ -62,7 +63,7 @@ class EOHandler(BaseRequestHandler):
 Provide a valid override key:
 """
         self.__send(msg)
-        key = self.request.recv(512)
+        key = self.request.recv(EO_SZ**3)
         try:
           output = check_output(['./emergency_override', 'check'], input=key)
         except Exception as e:
