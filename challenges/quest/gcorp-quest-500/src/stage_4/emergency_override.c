@@ -3,7 +3,7 @@
 //    date: 2017-08-30
 //  author: paul.dautry
 // purpose:
-//      G-Corp Stage 4 - Emergency Override
+//      G-Corp Stage 4 - Emergency Override (running on 12042)
 // license:
 //      GPLv3
 //
