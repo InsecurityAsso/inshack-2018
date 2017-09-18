@@ -4,8 +4,8 @@
 //  author: paul.dautry
 // purpose:
 //      G-Corp Stage 3 - Encrypted Storage
-//      Encrypt & decrypt files using symmetric algorithm XXX and chaining 
-//      blocks using CBC mode. 
+//      Encrypt & decrypt files using symmetric algorithm XTEA and CBC chaining 
+//      mode. 
 // license:
 //      GPLv3
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
