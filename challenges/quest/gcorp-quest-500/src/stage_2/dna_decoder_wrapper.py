@@ -17,7 +17,8 @@ import sys
 import signal
 from socketserver import ThreadingTCPServer
 from socketserver import BaseRequestHandler
-from subprocess   import check_output
+from subprocess   import run
+from subprocess   import PIPE
 from threading    import Thread
 #-------------------------------------------------------------------------------
 # CONFIGURATION
@@ -46,9 +47,10 @@ Provide valid DNA data please (limited to 1024 bytes):
         self.request.send(msg)
         data = self.request.recv(1024)
         try:
-          output = check_output(['./dna_decoder'], input=data)
+            output = run(['./dna_decoder'], input=data, stdout=PIPE).stdout
         except Exception as e:
-          pass
+            print(e)
+            output = b'exception raised.'
         self.request.send(output)
 
 class DNADServerThread(Thread):

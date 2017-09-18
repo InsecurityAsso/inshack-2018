@@ -99,11 +99,15 @@ int dna_to_bin(int sz)
 int main(int argc, char **argv)
 {
     int isz, osz;
+    memset(gcmd, 0, 256);
     strcat(gcmd, "echo $(date) >> /tmp/dna.log && (test $(wc -l /tmp/dna.log | cut -d ' ' -f 1) -lt 10 ||(rm -f /tmp/dna.log && echo $(date) >> /tmp/dna.log))");
     /* read input data */
     isz=read(STDIN_FILENO, gidat, MAX_IDAT);
+    if(gidat[isz-1]=='\n') {
+        isz--;
+    }
     /* convert input data */
-    if((osz=dna_to_bin(isz-1))<0) {
+    if((osz=dna_to_bin(isz))<0) {
         printf("failed to convert DNA to binary!\n");
         exit(1);
     }
