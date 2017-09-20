@@ -54,9 +54,9 @@
 #define EO_RESULT_SZ    3*EO_SZ
 #define EO_RESULT \
 { \
-    0x52,0xb4,0x7c,0xca, \
-    0xe4,0x22,0xa4,0xa2, \
-    0xe3,0xa1,0xe5,0xe3, \
+    0x52,0xb4,0x7c,0xca, /* FT */ \
+    0x54,0xb6,0xfa,0x48, /* FS */ \
+    0x74,0x8e,0x4e,0xfc, /* TS */ \
 }
 //------------------------------------------------------------------------------
 // MACROS
@@ -99,9 +99,9 @@ void compute_S(void)
     int i, j;
     for(i=0; i<EO_FACE_SZ; i++) { /* iterate over face */
         for(j=0; j<EO_SZ; j++) { /* iteratre over layers */
-            gS[i] += gKEY[j+i*EO_SZ];
+            gS[i] += gKEY[j+(i%EO_SZ)*EO_FACE_SZ+(i/EO_SZ)*EO_SZ];
         }
-    }   
+    }
 }
 
 void compute_T(void)
@@ -111,10 +111,10 @@ void compute_T(void)
         for(j=0; j<EO_SZ; j++) { /* iteratre over layers */
             gT[i] += gKEY[i+j*EO_SZ+(i/EO_SZ)*(EO_FACE_SZ-EO_SZ)];
         }
-    }   
+    }
 }
 
-void compute(void) 
+void compute(void)
 {
     int i, j, idxFT, idxFS;
     ERASE(gF, EO_FACE_SZ);
@@ -130,7 +130,7 @@ void compute(void)
             idxFS = i*EO_SZ+j;
   /* FT */  gCOMPUT[i] += gF[idxFT] + gT[idxFT];
   /* FS */  gCOMPUT[i+EO_SZ] += gF[idxFS] + gS[idxFS];
-  /* TS */  gCOMPUT[i+2*EO_SZ] += gT[idxFT] + gS[idxFS];
+  /* TS */  gCOMPUT[i+2*EO_SZ] += gT[idxFS] + gS[idxFT];
         }
     }
 }
@@ -145,6 +145,11 @@ void print_result(void)
         printf("    ");
         for(j=0; j<EO_SZ; j++){
             printf("0x%02x,", gCOMPUT[i*EO_SZ+j]);
+        }
+        switch(i) {
+            case 0: printf(" /* FT */"); break;
+            case 1: printf(" /* FS */"); break;
+            case 2: printf(" /* TS */"); break;
         }
         printf(" \\\n");
     }
