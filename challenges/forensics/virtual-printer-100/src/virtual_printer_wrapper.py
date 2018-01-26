@@ -5,8 +5,7 @@
 #    date: 2017-08-30
 #  author: paul.dautry
 # purpose:
-#      Stage 2 - G-Corp DNA Decoder
-#         Wrapper for dna_decoder binary
+#      Wrapper for virtual printer script
 # license:
 #      GPLv3
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
