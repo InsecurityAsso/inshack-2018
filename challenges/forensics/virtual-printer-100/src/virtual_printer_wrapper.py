@@ -16,11 +16,10 @@ import sys
 import signal
 import redis
 import base64
-from uuid           import uuid4
+from threading      import Thread
 from http.server    import HTTPServer
 from http.server    import BaseHTTPRequestHandler
-from subprocess     import check_output
-from threading      import Thread
+from virtual_printer import print_img
 #===============================================================================
 # CONFIGURATION
 #===============================================================================
@@ -28,7 +27,6 @@ HOST = 'localhost'
 PORT = 24042
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
-TMP_DIR = 'tmp/'
 WELCOME = """
 <html>
     <head>
@@ -39,7 +37,7 @@ WELCOME = """
 +------------------------------------------------------------------------------+
 |                                                                              |
 |                          Virtual Printer Service !                           |
-|                                                                              | 
+|                                                                              |
 +------------------------------------------------------------------------------+
 |                              ________________                                |
 |                            _/_______________/|                               |
@@ -133,53 +131,54 @@ class VPSDHandler(BaseHTTPRequestHandler):
         ip = self.client_address[0]
         data = self.__read_data()
         b64 = data.split(b'\r\n')[4]
+
         try:
-            img = base64.b64decode(b64)
+            img_data = base64.b64decode(b64)
         except:
-            return '''
+            return """
 Error: could not find or decode base64 content.
 Please upload data using the following command: curl -X POST --form "fileupload=@<file.png.b64>" http://...:.../print
-'''
-        tpath = os.path.join(TMP_DIR, '{0}.png'.format(uuid4()))
-        with open(tpath, 'wb') as f:
-            f.write(img)
+"""
+
         try:
-            cmd = ['./virtual_printer.py', tpath, ip]
-            print('[INF] running command: {0}'.format(cmd))
-            output = check_output(cmd)
-            os.remove(tpath)
-        except:
-            os.remove(tpath)
-            return '''
+            result = print_img(img_data, ip)
+        except Exception as e:
+            return """
 Error: service failed to process your image. Try with another one.
 If the problem persists with other images, please contact an admin.
-            '''
-        opath = output.split(b'\n')[0]
-        secret = output.split(b'\n')[1]
+"""
+
+        if not result['status']:
+            return result['error']
+
+        page_data = result['data']
+        secret = result['b64sn']
+
         self.__save_secret(ip, secret)
-        with open(opath, 'rb') as f:
-            odata = f.read()
-        os.remove(opath)
-        return base64.b64encode(odata).decode('utf-8')
+
+        return base64.b64encode(page_data).decode('utf-8')
     #---------------------------------------------------------------------------
     # __serial_number
     #---------------------------------------------------------------------------
     def __serial_number(self):
         ip = self.client_address[0]
         data = self.__read_data()
+
         if data[0:3] == b'sn=':
             secret = data[3:]
             saved_secret = REDIS_CONN.get('vps-'+ip)
+
             if saved_secret is None:
-                return 'Too late, you must submit your serial-number within a timeframe of 25 seconds after your image was printed.'
+                return "Too late, you must submit your serial-number within a timeframe of 25 seconds after your image was printed."
             elif secret == saved_secret:
-                print('[INF] {0} gets a flag!'.format(ip))
-                return 'Good job ! DO NOT LEAK SECRET FILES BY PRINTING THEM ! You can validate with: {0}'.format(FLAG)
-            return 'Wrong secret... Try again :)'
-        return '''
+                print("[INF] {0} gets a flag!".format(ip))
+                return "Good job ! DO NOT LEAK SECRET FILES BY PRINTING THEM ! You can validate with: {0}".format(FLAG)
+            return "Wrong secret... Try again :)"
+
+        return """
 Error: could not find the serial number.
 Please upload data using the following command: curl -X POST --data "sn=<b64encoded_serial_number>" http://...:.../serial-number
-'''
+"""
     #---------------------------------------------------------------------------
     # handle HEAD requests
     #---------------------------------------------------------------------------
@@ -198,7 +197,7 @@ Please upload data using the following command: curl -X POST --data "sn=<b64enco
     #---------------------------------------------------------------------------
     def do_POST(self):
         self.__debug_info()
-        
+
         if self.path == '/print':
             resp = self.__print()
         elif self.path == '/serial-number':
@@ -237,15 +236,13 @@ def main():
     # load flag from external file
     global FLAG
     with open('flag.txt', 'r') as f:
-        FLAG = f.read() 
+        FLAG = f.read()
         print('[INF] loaded flag: {0}'.format(FLAG))
         stop = 0
         while FLAG[stop] != '}':
             stop += 1
         FLAG = FLAG[:stop+1]
         print('[INF] processed flag: {0}'.format(FLAG))
-    # make tmp/ directory
-    os.makedirs(TMP_DIR, exist_ok=True)
     # test redis connection
     try:
         REDIS_CONN.set('foo', 'bar')
@@ -255,6 +252,7 @@ def main():
         print('[ERR] failed to interact with redis server. (host={0},port={1})'.format(
             REDIS_HOST, REDIS_PORT))
         exit(1)
+    # start http server thread
     SVR_THD.start()
     SVR_THD.join()
 #===============================================================================

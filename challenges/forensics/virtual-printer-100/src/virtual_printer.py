@@ -5,7 +5,7 @@
 #    date: 2017-09-26
 #  author: paul.dautry
 # purpose:
-#   
+#
 # license:
 #       GPLv3
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -13,13 +13,11 @@
 # IMPORTS
 #===============================================================================
 import os
-import sys
-from uuid       import uuid4
-from base64     import b64encode
-from datetime   import datetime
+import io
 from PIL        import Image
 from PIL        import ImageDraw
-
+from base64     import b64encode
+from datetime   import datetime
 #===============================================================================
 # CONFIG
 #===============================================================================
@@ -33,17 +31,15 @@ def pdbg(msg):
 #===============================================================================
 # CLASSES
 #===============================================================================
+
 class InvalidIPv4Exception(Exception):
-    def __init__(self):
-        super(InvalidIPv4Exception, self).__init__()
+    pass
 
 class TooManyBytesException(Exception):
-    def __init__(self):
-        super(TooManyBytesException, self).__init__()
+    pass
 
 class InvalidDPIValueException(Exception):
-    def __init__(self):
-        super(InvalidDPIValueException, self).__init__()
+    pass
 
 class MachineIdentificationCode(object):
     def __init__(self, ip):
@@ -56,14 +52,16 @@ class MachineIdentificationCode(object):
         self.sn = os.urandom(32)
         self.__prepare(ip)
 
-
     def __convert_ip(self, ip):
         digits = [ int(e) for e in ip.split('.') ]
+
         if len(digits) != 4:
             raise InvalidIPv4Exception
+
         for e in digits:
             if e > 0xff or e < 0:
                 raise InvalidIPv4Exception
+
         return bytes(digits)
 
     def __get_datetime(self):
@@ -74,16 +72,20 @@ class MachineIdentificationCode(object):
 
     def __set_data(self, data):
         pdbg('mic data(sz={0}): {1}'.format(len(data), data))
+
         if len(data) > self.w:
             raise TooManyBytesException
+
         for c in range(0, self.w):
-            if c < len(data):
-                o = data[c]
-            else:
+            if c >= len(data):
                 continue
+
+            o = data[c]
+
             for r in range(0, self.h):
                 if (o >> r) & 1 == 0:
                     self.mat[7-r][c] = 0
+
         self.print_mat()
 
     def __prepare(self, ip):
@@ -161,31 +163,29 @@ class A4Page(object):
             self.page.paste(rimg, (self.l, self.t))
         return True
 
-    def print(self):
-        npath = '/tmp/{0}.png'.format(uuid4())
-        self.page.save(npath)
-        return npath
+    def data(self):
+        data = io.BytesIO()
+        self.page.save(data, format='png')
+        return data
 #===============================================================================
 # FUNCTIONS
 #===============================================================================
-def main():
-    if len(sys.argv) != 3:
-        print('usage: %s <fpath> <ip>')
-        exit(1)
+def print_img(img_bytes, ip):
     page = A4Page((25, 25, 25, 25), 300)
-    mic = MachineIdentificationCode(sys.argv[2])
-    img = Image.open(sys.argv[1], 'r')
+    mic = MachineIdentificationCode(ip)
+    img = Image.open(io.BytesIO(img_bytes))
     if not page.set_image(img):
-        print('invalid image. Try with another (RGB or RGBA) PNG file.')
-        exit(1)
+        return {
+            'status': False,
+            'error': 'invalid image. Try with another (RGB or RGBA) PNG file.'
+        }
     if not page.apply_mic(mic):
-        print('failed to apply mic.')
-        exit(1)
-    print(page.print())
-    print(mic.b64sn())
-    exit(0)
-#===============================================================================
-# SCRIPT
-#===============================================================================
-if __name__ == '__main__':
-    main()
+        return {
+            'status': False,
+            'error': 'failed to apply mic.'
+        }
+    return {
+        'status': True,
+        'data': page.data().getvalue(),
+        'b64sn': mic.b64sn()
+    }
