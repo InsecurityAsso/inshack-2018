@@ -66,13 +66,13 @@ WELCOME = """
 |   $> curl <url>                                                              |
 |                                                                              |
 | POST                                                                         |
-|   > /print: expects data to be a base64 encoded (RGB or RGBA) PNG file.      |
-|   < you'll get your A4 page printed in the response as a base64 encoded PNG. |
+|   > /print: expects data to be a PNG file (RGB or RGBA).                     |
+|   < you'll get your A4 page printed in the response as raw PNG data.         |
 |                                                                              |
-|   $> curl -X POST --form "f=@<file.png.b64>" <url>                           |
+|   $> curl -X POST --form "f=@<file.png>" <url>                               |
 |                                                                              |
 |   > /serial-number: expects data to be a base64 encoded S/N                  |
-|   < you'll get a flag if you're right                                        |
+|   < you'll get the flag if you're right                                      |
 |                                                                              |
 |   $> curl -X POST --data "sn=<b64encoded-serial-number>" <url>               |
 |                                                                              |
@@ -82,7 +82,7 @@ WELCOME = """
             If y0u w4nn4 l34k, b3 sm4rt & st34lthy.
         </pre>
         <pre style="visibility: hidden;">
-            Tested with curl 7.47.0
+            Tested with curl 7.55.1
         </pre>
     </body>
 </html>
@@ -92,14 +92,57 @@ WELCOME = """
 #===============================================================================
 class VPSDHandler(BaseHTTPRequestHandler):
     #---------------------------------------------------------------------------
+    # __read_sn
+    #---------------------------------------------------------------------------
+    def __read_sn(self, content_type, data):
+        return {
+            'status': True,
+            'data': data
+        }
+    #---------------------------------------------------------------------------
+    # __read_png
+    #---------------------------------------------------------------------------
+    def __read_png(self, content_type, data):
+        if 'boundary=' not in content_type:
+            return {
+                'status': False,
+                'error': "<boundary=---[snip]> is missing in content-type."
+            }
+
+        boundary = content_type.split('=')[-1].strip()
+        boundary = boundary.encode('utf-8')
+        blen = len(boundary)
+
+        data = b'\r\n'.join(data.split(b'\r\n')[4:-2])
+        return {
+            'status': True,
+            'data': data
+        }
+    #---------------------------------------------------------------------------
     # __read_data
     #---------------------------------------------------------------------------
     def __read_data(self):
         data = None
-        if 'Content-Length' in self.headers.keys():
-            content_length = int(self.headers['Content-Length'])
-            data = self.rfile.read(content_length)
-        return data
+        content_type = self.headers.get('Content-Type')
+        content_length = self.headers.get('Content-Length')
+        if content_length:
+            data = self.rfile.read(int(content_length))
+
+        if data is None:
+            return {
+                'status': False,
+                'error': "could not retrieve data from request."
+            }
+
+        if 'multipart/form-data' in content_type:
+            return self.__read_png(content_type, data)
+        elif 'application/x-www-form-urlencoded':
+            return self.__read_sn(content_type, data)
+
+        return {
+            'status': False,
+            'error': "expects either multipart/form-data or application/x-www-form-urlencoded."
+        }
     #---------------------------------------------------------------------------
     # __debug_info
     #---------------------------------------------------------------------------
@@ -129,16 +172,12 @@ class VPSDHandler(BaseHTTPRequestHandler):
     #---------------------------------------------------------------------------
     def __print(self):
         ip = self.client_address[0]
-        data = self.__read_data()
-        b64 = data.split(b'\r\n')[4]
 
-        try:
-            img_data = base64.b64decode(b64)
-        except:
-            return """
-Error: could not find or decode base64 content.
-Please upload data using the following command: curl -X POST --form "fileupload=@<file.png.b64>" http://...:.../print
-"""
+        result = self.__read_data()
+        if not result['status']:
+            return result['error']
+
+        img_data = result['data']
 
         try:
             result = print_img(img_data, ip)
@@ -156,13 +195,18 @@ If the problem persists with other images, please contact an admin.
 
         self.__save_secret(ip, secret)
 
-        return base64.b64encode(page_data).decode('utf-8')
+        return page_data
     #---------------------------------------------------------------------------
     # __serial_number
     #---------------------------------------------------------------------------
     def __serial_number(self):
         ip = self.client_address[0]
-        data = self.__read_data()
+
+        result = self.__read_data()
+        if not result['status']:
+            return  result['error']
+
+        data = result['data']
 
         if data[0:3] == b'sn=':
             secret = data[3:]
@@ -172,7 +216,8 @@ If the problem persists with other images, please contact an admin.
                 return "Too late, you must submit your serial-number within a timeframe of 25 seconds after your image was printed."
             elif secret == saved_secret:
                 print("[INF] {0} gets a flag!".format(ip))
-                return "Good job ! DO NOT LEAK SECRET FILES BY PRINTING THEM ! You can validate with: {0}".format(FLAG)
+                resp = "Good job ! DO NOT LEAK SECRET FILES BY PRINTING THEM ! You can validate with: {0}".format(FLAG)
+                return resp
             return "Wrong secret... Try again :)"
 
         return """
@@ -203,9 +248,14 @@ Please upload data using the following command: curl -X POST --data "sn=<b64enco
         elif self.path == '/serial-number':
             resp = self.__serial_number()
         else:
-            resp = 'unknown path'
+            resp = "404 not found..."
+
         self.__set_headers()
-        self.wfile.write(resp.encode('utf-8'))
+
+        if isinstance(resp, str):
+            resp = resp.encode('utf-8')
+
+        self.wfile.write(resp)
 #-------------------------------------------------------------------------------
 # VPSDServerThread
 #-------------------------------------------------------------------------------
@@ -215,7 +265,7 @@ class VPSDServerThread(Thread):
         self.server = HTTPServer((HOST, PORT), VPSDHandler)
 
     def run(self):
-        print('[INF] Server running on {0}:{1}'.format(HOST, PORT))
+        print("[INF] Server running on {0}:{1}".format(HOST, PORT))
         self.server.serve_forever()
 
     def term(self):
