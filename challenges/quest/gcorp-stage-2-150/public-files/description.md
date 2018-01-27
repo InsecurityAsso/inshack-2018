@@ -1,0 +1,3 @@
+# G-Corp - stage 2
+
+All you need to do is pwn using some DNA samples...

@@ -1,1 +1,0 @@
-../stage_4/emergency_override.c
