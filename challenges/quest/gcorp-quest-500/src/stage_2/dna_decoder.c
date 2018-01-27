@@ -28,6 +28,8 @@
 //==============================================================================
 // CONFIGURATION
 //==============================================================================
+#define BYTE_SZ     4
+#define MAX_CMD     64
 #define MAX_ODAT    128
 #define MAX_IDAT    8*MAX_ODAT /* it should be 4*MAX_ODAT for safe buffer use */
 //==============================================================================
@@ -46,24 +48,24 @@ typedef unsigned char uchar;
 // GLOBALS
 //==============================================================================
 static uchar godat[MAX_ODAT];
-static char gcmd[256];
-static uchar gidat[MAX_IDAT]; 
+static char gcmd[MAX_CMD];
+static uchar gidat[MAX_IDAT];
 //==============================================================================
 // FUNCTIONS
 //==============================================================================
 //------------------------------------------------------------------------------
 // d2b
 //------------------------------------------------------------------------------
-int d2b(const char dna[4], uchar *o)
+int d2b(const char dna[BYTE_SZ], uchar *o)
 {
     int i;
     uchar lo=0x00;
-    for(i=0; i<4; i++) {
+    for(i=0; i<BYTE_SZ; i++) {
         switch(dna[i]) {
             case 'A': break;
-            case 'C': lo|=1<<(2*(3-i)); break;
-            case 'G': lo|=2<<(2*(3-i)); break;
-            case 'T': lo|=3<<(2*(3-i)); break;
+            case 'C': lo|=1<<(2*(BYTE_SZ-1-i)); break;
+            case 'G': lo|=2<<(2*(BYTE_SZ-1-i)); break;
+            case 'T': lo|=3<<(2*(BYTE_SZ-1-i)); break;
             default:
                 printf("unknown: %c\n", dna[i]);
                 return -1;
@@ -78,17 +80,17 @@ int d2b(const char dna[4], uchar *o)
 int dna_to_bin(int sz)
 {
     int i;
-    if(sz%4!=0) {
+    if(sz%BYTE_SZ!=0) {
         printf("DNA data size should be a multiple of 4!\n");
         return -1;
     }
-    for(i=0; i<sz/4; ++i) {
-        if(d2b(gidat+i*4, godat+i)!=0) {
+    for(i=0; i<sz/BYTE_SZ; ++i) {
+        if(d2b(gidat+i*BYTE_SZ, godat+i)!=0) {
             printf("DNA data contains a unknown character!\n");
             return -1;
         }
     }
-    return sz/4;
+    return sz/BYTE_SZ;
 }
 //==============================================================================
 // MAIN / ENTRY POINT
@@ -99,8 +101,8 @@ int dna_to_bin(int sz)
 int main(int argc, char **argv)
 {
     int isz, osz;
-    memset(gcmd, 0, 256);
-    strcat(gcmd, "echo $(date) >> /tmp/dna.log && (test $(wc -l /tmp/dna.log | cut -d ' ' -f 1) -lt 10 ||(rm -f /tmp/dna.log && echo $(date) >> /tmp/dna.log))");
+    memset(gcmd, 0, MAX_CMD);
+    strcat(gcmd, "echo $(date) > /tmp/dna.log");
     /* read input data */
     isz=read(STDIN_FILENO, gidat, MAX_IDAT);
     if(gidat[isz-1]=='\n') {
@@ -111,8 +113,10 @@ int main(int argc, char **argv)
         printf("failed to convert DNA to binary!\n");
         exit(1);
     }
+#ifdef DEBUG
+    printf("\ncmd: %s\n", gcmd);
+#endif
     /* update log */
-    //printf("\ncmd: %s\n", gcmd); /* debug */
     system(gcmd); /* VULN here */
     /* write output data */
     write(STDOUT_FILENO, godat, osz);

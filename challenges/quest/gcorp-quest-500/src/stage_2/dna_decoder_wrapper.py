@@ -59,6 +59,7 @@ class DNADServerThread(Thread):
         self.server = ThreadingTCPServer((HOST, PORT), DNADHandler)
 
     def run(self):
+        print("[INF] server running on {}:{}".format(HOST, PORT))
         self.server.serve_forever()
 
     def term(self):
