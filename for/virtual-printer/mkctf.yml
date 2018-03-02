@@ -1,0 +1,8 @@
+category: for
+enable: false
+flag: INSA{d54137b6928af176453f176c1b5ca9ec022003ede3fcf872a7a1741b09375a38}
+name: Virtual Printer
+parameters: {}
+points: 100
+slug: virtual-printer
+static: false
