@@ -3,8 +3,8 @@ directories:
   public: [public-files]
   private: [server-files, exploit, src]
 files:
-  bin: [build, deploy, Dockerfile, exploit/exploit]
-  config: {challenge: mkctf.yml}
-  txt: [writeup.md, public-files/description.md]
+  bin: [build, deploy, exploit/exploit]
+  config: {challenge: .mkctf.yml}
+  txt: [writeup.md, Dockerfile, public-files/description.md]
 flag: {prefix: 'INSA{', suffix: '}'}
 name: INS'hAck 2018
