@@ -1,5 +1,5 @@
 category: quest
-enable: false
+enabled: false
 flag: INSA{1fb977db25976d7e1a0fb713383de1cea90b2d15b4173708d867be3793571ed9}
 name: GCorp - Stage 2
 parameters: {}

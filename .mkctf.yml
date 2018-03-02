@@ -1,5 +1,7 @@
 categories: [bugbounty, crypto, for, misc, prog, pwn, re, web, quest]
-directories: [server-files, public-files, exploit, src]
+directories: 
+  public: [public-files]
+  private: [server-files, exploit, src]
 files:
   bin: [build, deploy, Dockerfile, exploit/exploit]
   config: {challenge: mkctf.yml}
