@@ -3,7 +3,9 @@ directories:
   public: [public-files]
   private: [server-files, exploit, src]
 files:
-  bin: [build, deploy, exploit/exploit]
+  build: build
+  deploy: deploy
+  status: exploit/exploit
   config: {challenge: .mkctf.yml}
   txt: [writeup.md, Dockerfile, public-files/description.md]
 flag: {prefix: 'INSA{', suffix: '}'}
