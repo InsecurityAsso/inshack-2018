@@ -1,3 +1,7 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
 category: quest
 enabled: false
 flag: INSA{1fb977db25976d7e1a0fb713383de1cea90b2d15b4173708d867be3793571ed9}
@@ -5,4 +9,4 @@ name: GCorp - Stage 2
 parameters: {}
 points: 150
 slug: gcorp-stage-2
-static: false
+standalone: false
