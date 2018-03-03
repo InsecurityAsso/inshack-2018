@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
->&2 echo "not implemented."
-exit 1
+#>&2 echo "not implemented."
+echo "challenge does not need to be built."
+exit 0
