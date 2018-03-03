@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
->&2 echo "not implemented."
-exit 1
+make -C src/
+cp src/dna_decoder server-files/dna_decoder
+exit 0

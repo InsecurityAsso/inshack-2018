@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
->&2 echo "not implemented."
-exit 1
+docker build -f Dockerfile .
