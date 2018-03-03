@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
->&2 echo "not implemented."
-exit 1
+#>&2 echo "not implemented."
+echo "nothing to deploy here."
+exit 0
