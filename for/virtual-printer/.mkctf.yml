@@ -7,9 +7,9 @@ enabled: false
 flag: INSA{d54137b6928af176453f176c1b5ca9ec022003ede3fcf872a7a1741b09375a38}
 name: Virtual Printer
 parameters:
-  host: localhost
   port: 24042
   exploit:
+    host: localhost
     png-file: exploit/test.png
   server:
     redis-host: localhost
