@@ -3,14 +3,12 @@
 # you know exactly what you're doing. #PEBCAK
 #
 category: quest
-enabled: false
+enabled: true
 flag: INSA{4778b157c376f7a087f4974651c2d8bc66fe2f0ca0883cc93570803a7e067e6f}
 name: GCorp - Stage 4
 parameters:
+  exploit: {host: localhost, key: exploit/key.bin}
   port: 12042
-  exploit:
-     host: localhost
-     key: exploit/key.bin
 points: 250
 slug: gcorp-stage-4
 standalone: false
