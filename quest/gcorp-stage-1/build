@@ -7,4 +7,4 @@
 >&2 echo "  4. start a capture on the network between your host and vm. "
 >&2 echo "  5. use ./src/send.py <vm-ip> <vm-port> to upload files to the vm."
 >&2 echo "  6. stop & save the wireshark capture to public-files/exfil.pcap"
-exit 1  # always fail
+exit 3  # notify manual
