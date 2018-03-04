@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
->&2 echo "not implemented."
-exit 10
+>&2 echo "/\!\\ You must regenerate GCorp - Stage 2 /\!\\"
+FLAG=$(grep 'flag:' .mkctf.yml) make -C src/
+exit 3 # MANUAL action required
