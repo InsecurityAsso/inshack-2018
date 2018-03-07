@@ -36,8 +36,14 @@ class MainHandler(RequestHandler):
     ## @brief      { function_description }
     ##
     def get(self):
-        self.write("""
-
+        self.write("""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Worm in Apple - Server</title>
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
+</head>
+    <body>
+        <pre>
      . .  .  .  . . .
 .                     .                  _.-/`/`'-._
 . Why are you here ?  .                /_..--''''_-'
@@ -55,10 +61,29 @@ class MainHandler(RequestHandler):
                \      tx      ooo@}                    /
                 \                                     /
                  `.                                 .'
-                   `-._                         _.-'ls
+                   `-._                         _.-'
                        ``------'''''''''------``
-
+        </pre>
+        <!-- [yo! dev! remove me! or not...]
+            LyAgICAgICAgLT4geW91J3JlIGxvb2tpbicgYXQgaXQKICAgICAgICAgICAgL25vd
+            GlmeSAgLT4gdGhlIGJlYWNvbiBlbmRwb2ludAogICAgICAgICAgICAvZmxhZyAgIC
+            AtPiB0aGUgZmxhZyBlbnBvaW50Li4uIGJ1dCBkb24ndCBnZXQgdG8gY29ja3kgdGh
+            lcmUKICAgICAgICAgICAgICAgICAgICAgICAgYXJlIHNvbWUgcmVxdWlyZW1lbnRz
+            Lg==
+        -->
+    </body>
+</html>
 """)
+##
+## @brief      Class for favicon handler.
+##
+class FaviconHandler(RequestHandler):
+    ##
+    ## @brief      { function_description }
+    ##
+    def get(self):
+        with open('favicon.ico', 'rb') as f:
+            self.write(f.read())
 ##
 ## @brief      Class for notify handler.
 ##
@@ -140,6 +165,7 @@ class FlagHandler(RequestHandler):
 def make_app(flag, debug):
     return Application([
         (r"/", MainHandler),
+        (r"/favicon.ico", FaviconHandler),
         (r"/notify", NotifyHandler),
         (r"/flag", FlagHandler, dict(flag=flag))
     ],

@@ -1,7 +1,7 @@
-# Virtual Printer
+# Forensics | Virtual Printer
 
-Hey ! 
+Hey !
 
-Someone did something really smart to retrieve stolen documents. 
+Someone did something really smart to retrieve stolen documents.
 
 Will you find what it's all about ?
