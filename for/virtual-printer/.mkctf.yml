@@ -9,7 +9,7 @@ name: Virtual Printer
 parameters:
   exploit:
     host: localhost
-    png-file: exploit/test.png
+    png-file: test.png
   port: 24042
   server:
     redis-host: localhost

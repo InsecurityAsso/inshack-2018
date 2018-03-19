@@ -9,7 +9,7 @@ name: GCorp - Stage 4
 parameters:
   exploit:
     host: localhost
-    key: exploit/key.bin
+    key: key.bin
   port: 12042
 points: 250
 slug: gcorp-stage-4
