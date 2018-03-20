@@ -41,6 +41,7 @@ class MainHandler(RequestHandler):
 <html>
     <head>
         <title>Virtual Printer Service</title>
+        <link rel="icon" type="image/gif" href="data:image/gif;base64,R0lGODlhEAAQAIAAAAAAAAAAACH5BAkAAAEALAAAAAAQABAAAAIgjI+py+0PEQiT1lkNpppnz4HfdoEH2W1nCJRfBMfyfBQAOw==">
     </head>
     <body>
         <pre>

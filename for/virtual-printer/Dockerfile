@@ -1,9 +1,20 @@
-FROM ?
+FROM ubuntu
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install git python3 python3-dev pip3 && \
-    git clone https://github.com/HugoDelval/inshack-2018 && \
-    cd inshack-2018/for/virtual-printer/server-files/ && \
-    pip3 install -r requirements.txt && \
-    ./virtual_printer_wrapper.py --config ../.mkctf.yml
+    apt-get install -y python3 python3-dev python3-pip redis-server
+
+ADD server-files/requirements.txt /tmp
+
+RUN pip3 install -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt && \
+    mkdir -p /srv/app
+
+ADD server-files/virtual_printer* .mkctf.yml /srv/app/
+RUN useradd vp && \
+    chown vp:vp /srv/app -R
+
+WORKDIR /srv/app/
+
+CMD service redis-server start && \
+    su -c "./virtual_printer_wrapper.py --config .mkctf.yml" vp
