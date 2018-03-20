@@ -7,9 +7,9 @@ analysis.
 When opened with Wireshark, the file shows a TCP connection with a lot of data
 going through it. Some of this data consists of a plaintext which seems to be a
 message from a hacker to another hacker. It actually gives a clue on the content
-of the data tranferred.
+of the data transferred.
 
-Use follow TCP stream functionnality and save the raw data stream into a file.
+Use follow TCP stream functionality and save the raw data stream into a file.
 
 Run `binwalk -e` on the file you saved. It should be able extract an executable
 file that you can run.

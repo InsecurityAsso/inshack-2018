@@ -1,10 +1,20 @@
-FROM ?
+FROM ubuntu
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install git python3 python3-dev pip3 && \
-    git clone https://github.com/HugoDelval/inshack-2018 && \
-    cd inshack-2018/quest/gcorp-stage-4/server-files/ && \
-    pip3 install -r requirements.txt && \
-    ./emergency_override_wrapper.py --config ../.mkctf.yml run
+    apt-get install -y python3 python3-dev python3-pip
 
+ADD server-files/requirements.txt /tmp
+
+RUN pip3 install -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt && \
+    mkdir -p /srv/app
+
+ADD server-files/emergency_override* .mkctf.yml /srv/app/
+RUN useradd gcorp && \
+    chown gcorp:gcorp /srv/app -R
+
+WORKDIR /srv/app/
+USER gcorp
+
+CMD ./emergency_override_wrapper.py --config .mkctf.yml run
