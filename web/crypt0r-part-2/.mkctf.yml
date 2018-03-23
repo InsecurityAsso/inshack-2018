@@ -1,0 +1,13 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: web
+enabled: true
+flag: INSA{https://careers.ovh.com/?some_random_chrs_just_in_case}
+name: Crypt0r part 2
+parameters: {}
+points: 200
+slug: crypt0r-part-2
+standalone: false
+

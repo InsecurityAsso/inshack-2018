@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# docker build -t cryptor .
+rm -rf public-files/server && mkdir public-files/server
+cp -r server-files/* public-files/server/
+rm public-files/server/files/*
+rm -f public-files/src.zip
+(cd public-files/ && zip -r src.zip ./server/*)
+rm -rf public-files/server
+
