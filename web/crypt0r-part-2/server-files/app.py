@@ -40,7 +40,7 @@ def generate_cookie(insa_coins=400, name="Adrian Lamo"):
     yaml_document = yaml.dump({
         "name": name,
         "insa_coins": insa_coins,
-        "valid_until": int(time.time()) + 60,  # Cookie only valid 1min
+        "valid_until": int(time.time()) + 10*60,  # Cookie only valid 10min
     }, default_flow_style=False)
     signature = sign(PRIVATE_KEY, salt, yaml_document.encode())
     encoded_serialized = base64.urlsafe_b64encode(yaml_document.encode()).decode()
