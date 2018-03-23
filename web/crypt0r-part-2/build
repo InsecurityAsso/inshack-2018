@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# docker build -t cryptor .
+docker build -t cryptor .
 rm -rf public-files/server && mkdir public-files/server
 cp -r server-files/* public-files/server/
 rm public-files/server/files/*

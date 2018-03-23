@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker run --rm -it cryptor
+docker run -p 5000:5000 --rm -it cryptor
 
