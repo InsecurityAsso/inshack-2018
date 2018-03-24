@@ -52,10 +52,10 @@ POST valid DNA data (input limited to 1024 bytes).
     ##
     def post(self):
         data = self.request.body
-        print(data)
         # VULN: do not truncate input size
         try:
-            output = run(['./dna_decoder'], input=data, stdout=PIPE).stdout
+            client_ip = self.request.headers.get("X-Real-IP") or self.request.remote_ip
+            output = run(['./docker_wrapper.sh', client_ip], input=data, stdout=PIPE).stdout
         except Exception as e:
             access_log.exception("An exception occured...")
             output = b"Exception raised."
@@ -91,9 +91,6 @@ if __name__ == '__main__':
         conf = yaml.safe_load(f)
 
     parameters = conf['parameters']
-
-    with open('.flag.txt', 'w') as f:
-        f.write(conf['flag'])
 
     AsyncIOMainLoop().install()
 
