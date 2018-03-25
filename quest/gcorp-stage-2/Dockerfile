@@ -14,5 +14,7 @@ ADD server-files/dna_decoder_wrapper.py server-files/docker_wrapper.sh .mkctf.ym
 
 WORKDIR /srv/app/
 
+EXPOSE 80
+
 CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.dev.insecurity-insa.fr && \
     ./dna_decoder_wrapper.py --config .mkctf.yml
