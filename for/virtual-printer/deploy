@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build -f Dockerfile .
+docker run --rm -p 24042:24042 -it registry.dev.insecurity-insa.fr/insecurity/virtual-printer

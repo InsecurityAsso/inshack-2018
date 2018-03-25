@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run -v /var/run/docker.sock:/var/run/docker.sock -it --rm -p 12142:12142 gcorp-2
+docker run -v /var/run/docker.sock:/var/run/docker.sock -it --rm -p 12142:12142 registry.dev.insecurity-insa.fr/insecurity/gcorp-stage-2

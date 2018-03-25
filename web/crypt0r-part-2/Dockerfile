@@ -17,5 +17,4 @@ USER crypt0r
 
 EXPOSE 5000
 
-CMD python3 app.py
-
+CMD gunicorn app:app -b 0.0.0.0:5000 --access-logfile - --error-logfile -

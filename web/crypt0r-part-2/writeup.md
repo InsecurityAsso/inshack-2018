@@ -29,4 +29,3 @@ new_yaml = old_yaml + garbage + injection_goes_here
 To see the full exploit, please refer to the `exploit/exploit` file.
 
 PS: this challenge was written by our sponsor OVH ([https://ovh.com/](https://ovh.com/)), thanks again.
-
