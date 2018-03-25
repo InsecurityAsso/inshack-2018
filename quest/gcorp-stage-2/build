@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 make -C src/
 cp src/dna_decoder server-files/dna_decoder
+cat .mkctf.yml | shyaml get-value flag > server-files/.flag.txt
+docker build -t registry.dev.insecurity-insa.fr/insecurity/gcorp-stage-2 .
+docker build -t registry.dev.insecurity-insa.fr/insecurity/gcorp-stage-2-pwned . -f Dockerfile_pnwed
+docker push registry.dev.insecurity-insa.fr/insecurity/gcorp-stage-2
+docker push registry.dev.insecurity-insa.fr/insecurity/gcorp-stage-2-pwned
 exit 0

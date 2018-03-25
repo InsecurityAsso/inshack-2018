@@ -1,5 +1,5 @@
 CC=gcc
-CC_FLAGS=-O0
+CC_FLAGS=-O0 -static
 
 .PHONY: dna_decoder
 
