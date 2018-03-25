@@ -5,7 +5,7 @@ import time
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.poolmanager import PoolManager
 
-HOST = 'https://zoug.top:4443'
+HOST = 'https://amodifier:443'
 HEADERS = {'Authorization':'Basic k7SBjJ2qoKmqQUc5'}
 
 class SSLAdapter(HTTPAdapter):

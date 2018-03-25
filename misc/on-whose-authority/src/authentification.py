@@ -16,12 +16,12 @@ class MyHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "text")
             self.end_headers()
-            self.wfile.write(bytes("Flag: gotta_verify_the_certs", "utf-8"));
+            self.wfile.write(bytes("Flag: INSA{gotta_verify_the_certs}", "utf-8"));
         else:
             self.send_response(401)
             self.send_header("Content-type", "text")
             self.end_headers()
-            self.wfile.write(bytes("Tu ne m'as pas l'air digne de confiance...", "utf-8"));
+            self.wfile.write(bytes("You don't seem worthy of my trust...", "utf-8"));
 
 if __name__ == '__main__':
     server_class = HTTPServer
