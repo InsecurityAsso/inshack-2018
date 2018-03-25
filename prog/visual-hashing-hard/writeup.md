@@ -71,6 +71,6 @@ while True:
 print time.time()-starter
 ```
 
-After 212 seconds (I have a toaster PC), the script finds a match for the password, INSA{hctib}.
+After 212 seconds (I have a toaster PC), the script finds a match for the password, `INSA{hctib}`.
 
 Alternatively, you can run the bruteforce in a browser using Selenium or JS.
