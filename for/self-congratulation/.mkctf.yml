@@ -2,11 +2,11 @@
 # This file was generated using mkctf utility. Do not edit it manually unless
 # you know exactly what you're doing. #PEBCAK
 #
-category: web
+category: for
 enabled: true
-flag: INSA{https://careers.ovh.com/?some_random_chrs_just_in_case}
-name: Crypt0r part 2
+flag: INSA{xIU8t4Zs}
+name: Self Congratulation
 parameters: {}
-points: 200
-slug: crypt0r-part-2
-standalone: false
+points: 50
+slug: self-congratulation
+standalone: true

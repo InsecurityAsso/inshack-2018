@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-docker build -t cryptor .
+docker build -t registry.dev.insecurity-insa.fr/insecurity/cryptor-part-2 .
+docker push registry.dev.insecurity-insa.fr/insecurity/cryptor-part-2
 rm -rf public-files/server && mkdir public-files/server
 cp -r server-files/* public-files/server/
 rm public-files/server/files/*

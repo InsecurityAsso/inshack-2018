@@ -16,5 +16,7 @@ RUN useradd vp && \
 
 WORKDIR /srv/app/
 
+EXPOSE 24042
+
 CMD service redis-server start && \
     su -c "./virtual_printer_wrapper.py --config .mkctf.yml" vp

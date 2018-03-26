@@ -17,4 +17,6 @@ RUN useradd gcorp && \
 WORKDIR /srv/app/
 USER gcorp
 
+EXPOSE 12042
+
 CMD ./emergency_override_wrapper.py --config .mkctf.yml run

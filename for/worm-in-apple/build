@@ -4,3 +4,5 @@ cd src
 python3 build.py
 cd ..
 mv src/DoxyDoxygen.sublime-package public-files/
+docker build -t registry.dev.insecurity-insa.fr/insecurity/worm-in-apple .
+docker push registry.dev.insecurity-insa.fr/insecurity/worm-in-apple

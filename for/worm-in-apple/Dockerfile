@@ -17,4 +17,6 @@ RUN useradd wia && \
 WORKDIR /srv/app/
 USER wia
 
+EXPOSE 24123
+
 CMD ./server.py --config .mkctf.yml

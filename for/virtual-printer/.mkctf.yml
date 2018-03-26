@@ -8,7 +8,7 @@ flag: INSA{d54137b6928af176453f176c1b5ca9ec022003ede3fcf872a7a1741b09375a38}
 name: Virtual Printer
 parameters:
   exploit:
-    host: localhost
+    baseurl: http://localhost:24042
     png-file: test.png
   port: 24042
   server:

@@ -5,7 +5,7 @@ Once you've found that the sublime package is a zip file, unzip it.
 As the plugin is a real one you should be able to download an original version
 of it and make a diff on all files (the fastest way to find the "worm").
 
-When you find the akward piece of code, de-obfuscate it to find out what it's
+When you find the awkward piece of code, de-obfuscate it to find out what it's
 actually doing when started.
 
 You should find that it communicates regularly with a server. It's a beacon.
