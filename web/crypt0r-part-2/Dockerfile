@@ -4,7 +4,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y python3-pip
 
 ADD server-files/requirements.txt /tmp
-RUN pip3 install -r /tmp/requirements.txt && rm /tmp/requirements.txt
+RUN pip3 install --no-cache -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
 RUN mkdir -p /srv/app && \
     useradd crypt0r

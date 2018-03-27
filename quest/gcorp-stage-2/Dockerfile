@@ -2,11 +2,11 @@ FROM ubuntu
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y python3 python3-dev python3-pip docker.io
+    apt-get install -y python3 python3-pip docker.io
 
 ADD server-files/requirements.txt /tmp
 
-RUN pip3 install -r /tmp/requirements.txt && \
+RUN pip3 install --no-cache -r /tmp/requirements.txt && \
     rm /tmp/requirements.txt && \
     mkdir -p /srv/app
 
