@@ -1,4 +1,4 @@
-# Math killer - easy mode
+# Math killer - hard mode
 
 The solution is actually extremely complex (but can be found online) - see http://ami.ektf.hu/uploads/papers/finalpdf/AMI_43_from29to41.pdf
 
