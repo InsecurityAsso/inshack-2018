@@ -3,8 +3,6 @@ echo "Spawning your shell..."
 timeout --kill-after=122 120 docker run \
         --rm -it \
         --cpus=.2 \
-        --memory=128m \
-        --memory-swap=128m \
         --ulimit nproc=1024:1024 \
         --ulimit fsize=10000:10000 \
         --ulimit nofile=1024:2048 \
