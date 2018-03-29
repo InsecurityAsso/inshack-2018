@@ -10,6 +10,6 @@ parameters:
   exploit:
     url: https://insecurity:LTjdgKjKSiHswkf0iOEl@gcorp-stage-2.ctf.insecurity-insa.fr/
   port: 80
-points: 150
+points: 500
 slug: gcorp-stage-2
 standalone: false

@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{c1c5db68796f47146b8e46822c256be9190a76cad1ed820ccce78778dbe83285}
 name: GCorp - Stage 3
 parameters: {}
-points: 200
+points: 500
 slug: gcorp-stage-3
 standalone: true

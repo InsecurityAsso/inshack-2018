@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{OMG_you_actually_killed_math}
 name: Math killer - hard
 parameters: {}
-points: 50
+points: 500
 slug: math-killer-hard
 standalone: true

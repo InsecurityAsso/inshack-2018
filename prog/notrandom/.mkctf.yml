@@ -10,6 +10,6 @@ parameters:
   port: 5001
   exploit:
     host: localhost
-points: 150
+points: 500
 slug: notrandom
 standalone: false

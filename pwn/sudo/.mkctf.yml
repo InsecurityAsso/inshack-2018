@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{am_I_2_quick_4_U?}
 name: Sudo
 parameters: {}
-points: 200
+points: 500
 slug: sudo
 standalone: false

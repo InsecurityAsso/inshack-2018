@@ -10,6 +10,6 @@ parameters:
   exploit:
     baseurl: http://localhost:24123
   port: 24123
-points: 150
+points: 500
 slug: worm-in-apple
 standalone: false

@@ -7,6 +7,6 @@ enabled: false
 flag: INSA{7e0f6e0352419ff45a341c27096adc8ab46f286fb6a91a3a7e471f6294676dd2}
 name: crimemail
 parameters: {}
-points: 0
+points: 500
 slug: crimemail
 standalone: false

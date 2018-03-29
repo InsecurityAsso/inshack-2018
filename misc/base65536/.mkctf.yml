@@ -10,6 +10,6 @@ parameters:
   port: 5001
   exploit:
     url: http://localhost:5001/
-points: 0
+points: 500
 slug: base65536
 standalone: false

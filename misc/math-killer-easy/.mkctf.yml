@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{try_positive_solutions_now}
 name: Math killer - easy
 parameters: {}
-points: 50
+points: 500
 slug: math-killer-easy
 standalone: false

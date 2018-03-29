@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{fgs_use_HMAC_pleease}
 name: Crypt0r part 2
 parameters: {}
-points: 200
+points: 500
 slug: crypt0r-part-2
 standalone: false

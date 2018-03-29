@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{3cf6463910edffb0}
 name: Spreadshit
 parameters: {}
-points: 25
+points: 500
 slug: spreadshit
 standalone: true

@@ -11,6 +11,6 @@ parameters:
     url: http://localhost:12042
     key: key.bin
   port: 12042
-points: 250
+points: 500
 slug: gcorp-stage-4
 standalone: false

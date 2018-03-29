@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{hctib}
 name: Visual hashing - hard
 parameters: {}
-points: 50
+points: 500
 slug: visual-hashing-hard
 standalone: true
