@@ -1,7 +1,6 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, render_template
 import hashlib
 import yaml
-from yaml.reader import Reader
 import random
 import string
 import time
@@ -16,8 +15,10 @@ PRIVATE_KEY = random_byte_str(20)
 app = Flask(__name__)
 VALID_CHARS_PERMISSIVE = string.printable.encode()
 VALID_CHARS_STRICT = (string.ascii_letters + string.digits + '-.: _').encode()
-with open("templates/index.html") as f:
-    INDEX_TEMPLATE = f.read()
+FILES = {}
+for f in ["basic", "premium"]:
+    with open("files/" + f) as fh:
+        FILES[f] = fh.read()
 
 # Never trust user input
 def strip_invalid(s, charset=VALID_CHARS_STRICT):
@@ -68,35 +69,37 @@ def home():
     try:
         user = extract_user_info(user_cookie)
     except Exception as e:
-        return make_response(str(e))
+        resp = make_response(render_template("error.html", error=str(e)))
+        resp.set_cookie("user", generate_cookie())
+        return resp
     # Never trust user input
     name = strip_invalid(user["name"].encode())
-    resp = make_response(INDEX_TEMPLATE.format(user["insa_coins"], name))
+    resp = make_response(render_template("index.html", insa_coins=user["insa_coins"], name=name))
     resp.set_cookie("user", user_cookie)
     return resp
 
 
 @app.route('/pay', methods=["POST"])
 def pay():
-    if set(request.args.keys()) != {"cost", "file"}:
-        return "Wrong params"
+    if set(request.args.keys()) != {"cost", "offer"}:
+        return render_template("error.html", error="Wrong params")
     fnames = {
-        1: "me_and_Gary_McKinnon",
-        2: "me_and_LulzSec",
-        3: "me_and_Bpgnir_Xynon",
+        "basic": "Not_so_important_file",
+        "premium": "Your_precious_files",
     }
     try:
         cost = int(request.args["cost"])
-        f = int(request.args["file"])
+        f = request.args["offer"]
         assert f in fnames
         assert cost > 0
     except Exception:
-        return "Wrong params"
-    if f == 3 and cost != 500:
-        return "This file looks precious to you, It will cost a lot to decrypt it."
+        return render_template("error.html", error="Wrong params")
+    if f == "premium" and cost != 500:
+        return render_template("error.html", error="Those files look precious to you, It will cost a lot to decrypt them.")
+
     user_cookie = request.cookies.get("user")
     if not user_cookie:
-        return "You has no coin, pleaze <a href='/'>by some</a>!"
+        return render_template("error.html", error="you has no coin, pleaze go by some!")
     try:
         user = extract_user_info(user_cookie)
     except Exception as e:
@@ -104,13 +107,10 @@ def pay():
 
     insa_coins = user["insa_coins"]
     if insa_coins < cost:
-        return "You don't have enough IC to decrypt this file, please <a href=/>buy some</a>"
+        return render_template("error.html", error="You don't have enough INShAcoins to decrypt this file, please go buy some")
     insa_coins -= cost
-    with open("files/" + str(f), "rb") as fh:
-        resp = make_response(fh.read())
-    resp.headers['Content-type'] = 'application/octet-stream'
-    resp.headers['Content-Disposition'] = 'attachment; filename={}'.format(fnames[f])
 
+    resp = make_response(render_template("success.html", message=FILES.get(f, b'')))
     user_cookie = generate_cookie(insa_coins=insa_coins, name=user["name"])
     resp.set_cookie("user", user_cookie)
 
@@ -120,10 +120,10 @@ def pay():
 @app.route('/change-name', methods=["POST"])
 def change_name():
     if set(request.form.keys()) != {"name"}:
-        return "Wrong params"
+        return render_template("error.html", error="Wrong params")
     new_name = request.form["name"]
     if not isinstance(new_name, str):
-        return "Wrong param"
+        return render_template("error.html", error="Wrong params")
     # Never trust user input
     new_name = strip_invalid(new_name.encode())
     user_cookie = generate_cookie(name=new_name)

@@ -4,7 +4,7 @@
 #
 category: web
 enabled: true
-flag: INSA{https://careers.ovh.com/?some_random_chrs_just_in_case}
+flag: INSA{fgs_use_HMAC_pleease}
 name: Crypt0r part 2
 parameters: {}
 points: 200
