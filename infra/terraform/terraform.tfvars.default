@@ -1,0 +1,11 @@
+openstack_tenant_id = ""
+openstack_tenant_name = ""
+openstack_username = ""
+openstack_password = ""
+
+ovh_endpoint = "ovh-eu"
+ovh_application_key = ""
+ovh_application_secret = ""
+ovh_consumer_key = ""
+
+prod_public_key = ""
