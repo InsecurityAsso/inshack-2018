@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -it -d --name ocr -p 5000:5000 ocr
