@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-random=$(strings /dev/urandom | grep -o "[[:alnum:]]" | head -n 20 | /usr/bin/tr -d "\n")
-image="gcorp-2-pwned-${1}-${random}"
+random=$(pwgen 20 1)
+image="gcorp-stage-2-pwned-${1}-${random}"
 
 timeout --kill-after=6 5 docker run --rm \
        -i \
-       --name ${image} \
+       --name=${image} \
        --cpus=".1" \
        --memory=64m \
        --memory-swap=64m \
@@ -14,3 +14,5 @@ timeout --kill-after=6 5 docker run --rm \
        --ulimit nofile=1024:2048 \
        --ulimit nice=1 \
        registry.dev.insecurity-insa.fr/insecurity/gcorp-stage-2-pwned
+
+docker kill ${image} >/dev/null 2>&1 || exit 0
