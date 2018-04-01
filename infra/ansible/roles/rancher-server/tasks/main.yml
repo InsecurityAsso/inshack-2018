@@ -1,0 +1,35 @@
+---
+- name: nginx proxy
+  docker_container:
+    name: nginx-proxy
+    image: jwilder/nginx-proxy:latest
+    volumes:
+      - /containers/volumes/nginx-proxy/ssl:/etc/nginx/certs:ro
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    published_ports:
+      - 80:80
+      - 443:443
+
+- name: letsencrypt nginx companion
+  docker_container:
+    name: letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - /containers/volumes/nginx-proxy/ssl:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+- name: rancher server container
+  docker_container:
+    name: rancher-server
+    image: rancher/server:latest
+    env:
+      VIRTUAL_PORT: 8080
+      VIRTUAL_HOST: '{{ inventory_hostname }}'
+      LETSENCRYPT_HOST: '{{ inventory_hostname }}'
+      LETSENCRYPT_EMAIL: leo84.martinez@gmail.com
+    volumes:
+      - /containers/volumes/rancher-server/mysql:/var/lib/mysql:rw

@@ -1,0 +1,8 @@
+---
+- include_tasks: packages.yml
+  tags: packages
+
+- include_tasks: security.yml
+  tags: security
+
+- include_tasks: ipv6.yml

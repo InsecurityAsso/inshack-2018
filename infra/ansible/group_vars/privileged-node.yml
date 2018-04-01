@@ -1,0 +1,4 @@
+rancher_node: true
+rancher_env: privileged
+munin_node: true
+munin_server: false

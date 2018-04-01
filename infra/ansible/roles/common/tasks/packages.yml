@@ -1,0 +1,12 @@
+---
+- name: Install base packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    install_recommends: False
+    update_cache: True
+  with_items:
+    - vim
+    - fail2ban
+    - htop
+    - netcat

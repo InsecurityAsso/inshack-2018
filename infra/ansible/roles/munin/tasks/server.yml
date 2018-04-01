@@ -1,0 +1,108 @@
+---
+- name: Include variables.
+  include_vars: "debian.yml"
+
+- name: Install required packages for munin (Debian).
+  apt: "name={{ item }} state=present"
+  with_items:
+    - munin
+    - python-passlib
+
+- name: Copy munin configurations.
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - src: munin.conf.j2
+      dest: /etc/munin/munin.conf
+    - src: hosts.conf.j2
+      dest: "{{ munin_conf_d_directory }}/hosts.conf"
+
+- name: Create munin html dir
+  file:
+    path: "{{ munin_htmldir }}"
+    state: directory
+    mode: 0777
+    owner: root
+    group: root
+
+- name: chmod 777 /var/log/munin
+  file:
+    path: "{{ munin_logdir }}"
+    mode: 0777
+    state: directory
+    owner: root
+    group: root
+
+- name: chmod 777 /var/lib/munin/cgi-tmp
+  file:
+    path: /var/lib/munin/cgi-tmp
+    mode: 0777
+    state: directory
+    owner: root
+    group: root
+
+- name: Enable or disable the munin cron job.
+  lineinfile:
+    dest: /etc/cron.d/munin
+    state: "{{ munin_cron_job }}"
+    regexp: "^\\* \\* \\* \\* \\*"
+    line: "* * * * *     munin test -x /usr/bin/munin-cron && /usr/bin/munin-cron"
+
+- name: Create default munin nginx conf dir
+  file:
+    path: /containers/volumes/nginx
+    mode: 0770
+    owner: root
+    group: root
+    state: directory
+
+- name: Apply default munin nginx conf
+  copy:
+    src: nginx-default.conf
+    dest: /containers/volumes/nginx/default.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: nginx proxy
+  docker_container:
+    name: nginx-proxy
+    image: jwilder/nginx-proxy:latest
+    volumes:
+      - /containers/volumes/nginx-proxy/ssl:/etc/nginx/certs:ro
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    published_ports:
+      - 80:80
+      - 443:443
+
+- name: letsencrypt nginx companion
+  docker_container:
+    name: letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - /containers/volumes/nginx-proxy/ssl:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+- name: nginx munin
+  docker_container:
+    name: nginx-munin
+    image: nginx:alpine
+    privileged: true
+    env:
+      VIRTUAL_PORT: 80
+      VIRTUAL_HOST: "munin.infra.insecurity-insa.fr"
+      LETSENCRYPT_HOST: "munin.infra.insecurity-insa.fr"
+      LETSENCRYPT_EMAIL: leo84.martinez@gmail.com
+    volumes:
+      - /containers/volumes/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/munin/static:/etc/munin/static:ro
+      - /var/run/munin/fcgi-html.sock:/var/run/munin/fastcgi-html.sock
+      - /var/run/munin/fcgi-graph.sock:/var/run/munin/fastcgi-graph.sock

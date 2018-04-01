@@ -1,12 +1,14 @@
 # Infrastructure automation
 
-The goal of this part is to automate infrastructure deployments by using two
+The goal of this part is to automate infrastructure deployments by using these
 tools:
 
 - **Terraform**: allows us to define infrastructure as code and easily deploy
 it (by spawning machines automatically)
 - **Ansible**: deploys all the software stack on a server after it has been
 deployed by *Terraform*
+- `ansible-playbook`: a Go app that converts the *Terraform* state file into an
+*Ansible* playbook
 
 
 ## Terraform
@@ -30,3 +32,14 @@ vim terraform.tfvars
 terraform plan
 terraform apply
 ```
+
+Please note that Terraform keeps a file named `terraform.tfstate` which is
+updated after each deployment, in order to keep track of the currently deployed
+machines. Thus, if you want to run a deployment from a different machine that
+the one that spawned the initial infra, you have to share the
+`terraform.tfstate` before. Otherwise, a new infra will be deployed!
+
+
+## Ansible
+
+Todo

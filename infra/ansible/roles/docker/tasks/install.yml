@@ -1,0 +1,20 @@
+---
+- name: Install Docker.
+  apt:
+    name: docker-ce=17.12.1~ce-0~debian
+    state: installed
+
+- name: Prevent Docker automatic upgrade
+  dpkg_selections:
+    name: docker-ce
+    selection: hold
+
+- name: Install docker-py
+  apt:
+    name: python-docker
+    state: present
+
+- name: Prevent docker-ce automatic upgrade
+  dpkg_selections:
+    name: docker-ce
+    selection: hold

@@ -1,0 +1,42 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+- name: apply common configuration to all nodes
+  hosts: all
+  remote_user: root
+  gather_facts: false
+
+  pre_tasks:
+  - name: Install python2 for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python)"
+    register: output
+    changed_when: output.stdout != ""
+  - name: Gathering Facts
+    setup:
+
+  roles:
+    - common
+
+- name: configure and deploy the management VM
+  hosts:
+    - management
+  remote_user: root
+  roles:
+    - docker
+    - munin
+
+- name: configure and deploy the rancher nodes
+  hosts:
+    - chal-node
+    - privileged-node
+    - internal-node-01
+    - internal-node-02
+    - internal-db-01
+  remote_user: root
+  vars_files:
+    - vars/private.yml
+
+  roles:
+    - docker
+    - rancher
+    - munin

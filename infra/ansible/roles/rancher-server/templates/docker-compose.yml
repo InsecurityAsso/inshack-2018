@@ -1,0 +1,28 @@
+version: "2"
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - '/containers/volumes/nginx-proxy/ssl:/etc/nginx/certs:ro'
+      - '/etc/nginx/vhost.d'
+      - '/usr/share/nginx/html'
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - '/containers/volumes/nginx-proxy/ssl:/etc/nginx/certs:rw'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+  rancher-server:
+    image: rancher/server:latest
+    environment:
+      VIRTUAL_PORT: 8080
+      VIRTUAL_HOST: {{ server_hostname }}
+      LETSENCRYPT_HOST: {{ server_hostname }}
+      LETSENCRYPT_EMAIL: leo84.martinez@gmail.com
+    volumes:
+      - '/containers/volumes/rancher-server/mysql:/var/lib/mysql:rw'

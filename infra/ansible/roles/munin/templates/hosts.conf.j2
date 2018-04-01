@@ -1,0 +1,15 @@
+# Munin hosts.
+{% for group in groups %}
+{% if group == 'chal-node' or group == 'privileged-node' or group == 'management' or group == 'internal-db-01' or group == 'internal-node-01' or group == 'internal-node-02'  %}
+{% for host in groups[group] %}
+[{{ hostvars[host]['ansible_fqdn'] }}]
+    address {{ host }}
+{% if host.extra is defined %}
+{% for extra in host.extra %}
+    {{ extra }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% endif %}
+{% endfor %}

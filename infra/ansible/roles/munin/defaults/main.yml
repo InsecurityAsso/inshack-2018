@@ -1,0 +1,75 @@
+---
+munin_conf_d_directory: /etc/munin/conf.d
+
+munin_dbdir: /var/lib/munin
+munin_htmldir: /var/www/html/munin
+munin_logdir: /var/log/munin
+munin_rundir: /var/run/munin
+
+munin_includedir: /etc/munin/conf.d
+
+munin_html_strategy: cgi
+munin_graph_strategy: cgi
+munin_cron_job: present
+
+munin_max_processes: 12
+
+munin_admin_user: munin
+munin_admin_password: munin
+munin_server: false
+
+# Will be translated into:
+# [host]
+#   address: [name]
+#   [extra.0]
+#   [extra.1]
+#   [...]
+#
+# Note that `name` can be hostname, or group + hostname, for example:
+# [example.com;foo.example.com]
+munin_hosts:
+  - {
+    name: "localhost",
+    address: "127.0.0.1",
+    extra: ["use_node_name yes"]
+  }
+
+munin_alerts: []
+#  - {
+#    name: "JohnDoe",
+#    email: "johndoe@example.com",
+#    subject: "Munin-notification for ${var:group} :: ${var:host}",
+#    level: "warning critical"
+#   }
+
+munin_node_bind_host: "*"
+munin_node_bind_port: "4949"
+
+munin_node_host_name: ''
+
+# Munin requires IPs be added as regular expressions.
+munin_node_allowed_ips:
+  - '^127\.0\.0\.1$'
+  - '^::1$'
+
+# Source and destination of munin plugins.
+munin_plugin_src_path: /usr/share/munin/plugins/
+munin_plugin_dest_path: /etc/munin/plugins/
+
+# List of munin plugins to enable.
+munin_node_plugins: []
+  # - name: uptime
+  # - name: if_eth0
+  #   plugin: if_
+  # - name: ps_test
+  #   plugin: ps_
+
+# Plugin configuration options (the key is the plugin heading, items in the
+# array will be options for the plugin).
+munin_node_config: {
+  # "ps_test": {
+  #   "env.regex": "bash",
+  #   "env.name": "bash"
+  # }
+}
+munin_node_cron_job: present

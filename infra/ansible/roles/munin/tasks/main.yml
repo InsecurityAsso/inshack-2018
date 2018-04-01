@@ -1,0 +1,6 @@
+---
+- include_tasks: server.yml
+  when: munin_server
+
+- include_tasks: node.yml
+  when: munin_node

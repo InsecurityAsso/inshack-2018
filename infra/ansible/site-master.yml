@@ -1,0 +1,17 @@
+---
+- name: Install rancher master servers
+  hosts: rancher-server
+  remote_user: root
+  gather_facts: false
+
+  pre_tasks:
+  - name: Install python2 for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python)"
+    register: output
+    changed_when: output.stdout != ""
+  - name: Gathering Facts
+    setup:
+
+  roles:
+    - docker
+    - rancher-server

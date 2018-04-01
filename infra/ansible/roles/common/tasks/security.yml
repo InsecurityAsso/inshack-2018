@@ -1,0 +1,11 @@
+---
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: root
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - ../files/hugo
+    - ../files/leo
+    - ../files/leo-mbp
+
