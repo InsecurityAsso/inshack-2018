@@ -6,3 +6,6 @@
 - include_tasks: config.yml
 
 - include_tasks: service.yml
+
+- include_tasks: docker-compose.yml
+  when: docker_install_compose
