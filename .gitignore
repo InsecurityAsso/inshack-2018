@@ -4,3 +4,6 @@ __pycache__/
 .terraform
 terraform.tfstate*
 terraform.tfvars
+
+# Pour macOS : Personne n'est parfait ;-)
+*.DS_Store
