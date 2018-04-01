@@ -1,0 +1,7 @@
+---
+monitored_groups:
+  - management
+  - internal-node
+  - internal-db-01
+  - chal-node
+  - privileged-node

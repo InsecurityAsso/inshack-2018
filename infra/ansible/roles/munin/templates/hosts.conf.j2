@@ -1,6 +1,6 @@
 # Munin hosts.
 {% for group in groups %}
-{% if group == 'chal-node' or group == 'privileged-node' or group == 'management' or group == 'internal-db-01' or group == 'internal-node-01' or group == 'internal-node-02'  %}
+{% if group in monitored_groups %}
 {% for host in groups[group] %}
 [{{ hostvars[host]['ansible_fqdn'] }}]
     address {{ host }}

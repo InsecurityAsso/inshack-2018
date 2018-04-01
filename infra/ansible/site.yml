@@ -21,6 +21,8 @@
   hosts:
     - management
   remote_user: root
+  vars_files:
+    - vars/public.yml
   roles:
     - docker
     - munin
