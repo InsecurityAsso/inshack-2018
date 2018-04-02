@@ -78,9 +78,9 @@ POST a valid override key.
         try:
             output = check_output(['./emergency_override', 'check'], input=key)
         except Exception as e:
-            access_log.exception("An exception occured...")
+            access_log.exception("An exception occurred...")
             self.set_status(500)
-            self.write("An exception occured, feel free to contact an admin.")
+            self.write("An exception occurred, feel free to contact an admin.")
             self.finish()
             return
 

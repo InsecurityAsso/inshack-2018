@@ -144,7 +144,7 @@ class PrintHandler(RequestHandler):
         try:
             result = print_img(img_data, self.request.remote_ip)
         except Exception as e:
-            access_log.exception("An exception occured...")
+            access_log.exception("An exception occurred...")
             self.__reject("[print_img:exception] service failed to process "
                           "your image. Try with another one.\nIf the problem "
                           "persists with other images, please contact an "
@@ -161,7 +161,7 @@ class PrintHandler(RequestHandler):
         try:
             await self.__save_secret(secret)
         except Exception as e:
-            access_log.exception("An exception occured...")
+            access_log.exception("An exception occurred...")
             self.__reject("[__save_secret:exception] service failed to save "
                           "the secret. Request timed-out.\nPlease contact an "
                           "admin. Redis server might be down.")

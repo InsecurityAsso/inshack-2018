@@ -87,7 +87,7 @@ while True:
             exit(0)
     except Exception as e:
         print(e)
-        print("An error occured, sorry")
+        print("An error occurred, sorry")
         continue
     except KeyboardInterrupt:
         print("Bye")

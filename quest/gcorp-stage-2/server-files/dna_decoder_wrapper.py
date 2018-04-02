@@ -63,7 +63,7 @@ POST valid DNA data (input limited to 1024 bytes).
                 ipaddress.ip_address(client_ip)
             output = run(['./docker_wrapper.sh', client_ip], input=data, stdout=PIPE).stdout
         except Exception as e:
-            access_log.exception("An exception occured...")
+            access_log.exception("An exception occurred...")
             output = b"Exception raised."
 
         self.write(output)

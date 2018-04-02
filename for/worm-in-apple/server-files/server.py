@@ -144,7 +144,7 @@ class FlagHandler(RequestHandler):
         try:
             cookie = cookie.decode()
         except Exception as e:
-            access_log.exception("An exception occured...")
+            access_log.exception("An exception occurred...")
             self.write("why did you change your cookie...")
             return
 
