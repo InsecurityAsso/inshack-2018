@@ -1,4 +1,4 @@
-# Write-up | Config Creator
+# pwn | Config Creator
 
 The program lets you create a configuration files through python fstrings. 
 

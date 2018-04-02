@@ -1,4 +1,4 @@
-# Write-up | OpenSource as a Service
+# pwn | OpenSource as a Service
 
 You are given a pseudo-shell with a restricted set of commands: {ls, cat, openstack}
 

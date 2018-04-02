@@ -1,4 +1,4 @@
-# Write-up | Sudo
+# pwn | Sudo
 
 The binary provided has the sticky bit set on the server:
 

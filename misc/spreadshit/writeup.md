@@ -1,4 +1,4 @@
-# Write-up | Spreadshit
+# MISC | Spreadshit
 
 Open the ods file with a spreadsheet editor.
 

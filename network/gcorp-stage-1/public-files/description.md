@@ -1,4 +1,4 @@
-# Quest | G-Corp - stage 1
+# For | G-Corp - stage 1
 
 While loosing some time on the Internet you fell on a old blog-post about
 conspiracy theories...

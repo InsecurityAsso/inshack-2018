@@ -1,4 +1,4 @@
-# Write-up | Worm In Apple
+# Forensics | Worm In Apple
 
 Once you've found that the sublime package is a zip file, unzip it.
 

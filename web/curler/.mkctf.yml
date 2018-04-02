@@ -2,7 +2,7 @@
 # This file was generated using mkctf utility. Do not edit it manually unless
 # you know exactly what you're doing. #PEBCAK
 #
-category: pwn
+category: web
 enabled: true
 flag: INSA{wrong_libs_combination?_or_bad_programmer?}
 name: Curler

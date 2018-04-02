@@ -1,4 +1,4 @@
-# Quest | G-Corp - stage 2
+# Pwn | G-Corp - stage 2
 
 All you need to do is _pwn_ using some DNA samples...
 

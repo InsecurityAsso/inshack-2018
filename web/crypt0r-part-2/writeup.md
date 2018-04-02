@@ -1,4 +1,4 @@
-# Write-up | Crypt0r second step
+# web | Crypt0r second step
 
 The goal here is to buy the file n°3. You have some money in your session cookie but not enough to buy the file. You need to modify the cookie to exploit the challenge.
 

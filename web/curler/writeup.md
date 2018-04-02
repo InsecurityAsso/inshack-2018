@@ -1,4 +1,4 @@
-# Write-up | Curler
+# web | Curler
 
 SSRF in python's `http.client` + command injection in aria2c
 
