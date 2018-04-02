@@ -6,9 +6,7 @@ category: crypto
 enabled: true
 flag: INSA{655e6_is_T0_Much}
 name: base65536
-parameters:
-  exploit:
-    url: http://localhost:5000/
+parameters: {}
 points: 500
 slug: base65536
 standalone: false
