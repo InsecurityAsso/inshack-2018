@@ -10,10 +10,12 @@ RUN pip3 install -r /tmp/requirements-wrapper.txt
 ADD server-files/shell.sh /
 
 RUN mkdir -p /srv/app && \
+    useradd curler && \
     echo '* * * * * root docker kill $(docker ps -f "name=curler-pwned" -f "status=running" | grep -P "Up \d+ minutes" | cut -d" " -f 1)' >> /etc/crontab && \
     echo >> /etc/crontab
 
 ADD server-files/wrapper.py /srv/app/
+RUN chown -R curler /srv/app/
 
 WORKDIR /srv/app
 
