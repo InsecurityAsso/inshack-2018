@@ -3,10 +3,10 @@
 # you know exactly what you're doing. #PEBCAK
 #
 category: web
-enabled: false
-flag: INSA{6dcf5b957c2b7bc53b1bb6b4914b121d54ee154da6a6d1cfe88358c54cc196ca}
+enabled: true
+flag: INSA{0cr_L0ng}
 name: OCR
 parameters: {}
-points: 500
+points: 400
 slug: ocr
 standalone: false

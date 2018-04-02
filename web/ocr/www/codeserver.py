@@ -42,13 +42,13 @@ def equation():
                 return render_template('result.html', result = "Some features are still in beta !")
             if formated_text.count('(') > 1 or formated_text.count(')') > 1 or formated_text.count('[') > 1 or formated_text.count(']') > 1 :
                 return render_template('result.html', result = "We can not solve complex equations for now !")
-            if any(i in formated_text for i in ["import","exec","compile","tesseract","chr","os","write"]):
+            if any(i in formated_text for i in ["import","exec","compile","tesseract","chr","os","write","sleep"]):
                 return render_template('result.html', result = "We can not understand your equation !")
             if len(formated_text) > 15:
                 return render_template('result.html', result = "We can not solve complex equations for now !")
             try:
                 if "==" in formated_text:
-                    parts = formated_text.split("==",num=2)
+                    parts = formated_text.split("==",maxsplit=2)
                     pa_1 = int(eval(parts[0]))
                     pa_2 = int(eval(parts[1]))
                     if pa_1 == pa_2:

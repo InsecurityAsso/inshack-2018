@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-docker build -t ocr .
+cat .mkctf.yml | shyaml get-value flag > www/private/flag.txt
+docker build -t registry.dev.insecurity-insa.fr/insecurity/ocr .
+docker push registry.dev.insecurity-insa.fr/insecurity/ocr

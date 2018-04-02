@@ -1,13 +1,15 @@
 FROM python:latest
 
+RUN pip install flask gunicorn pytesseract flask_recaptcha && \
+    apt-get update && apt-get upgrade -y &&\
+    apt-get install -y tesseract-ocr &&\
+    useradd python-runner
+
 RUN mkdir -p /var/www
 COPY www/ /var/www/
-RUN pip install flask && \
-    apt-get update && \
-    apt-get install -y tesseract-ocr &&\
-    pip install pytesseract &&\
-    pip install flask_recaptcha &&\
-    useradd python-runner
+
 WORKDIR /var/www/
 USER python-runner
-CMD ["python","/var/www/server.py"]
+EXPOSE 5000
+
+CMD gunicorn server:app -b 0.0.0.0:5000 --access-logfile - --error-logfile -

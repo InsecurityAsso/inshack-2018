@@ -43,7 +43,7 @@ def equation():
                     return render_template('result.html', result = "Some features are still in beta !")
                 if formated_text.count('(') > 1 or formated_text.count(')') > 1 or formated_text.count('[') > 1 or formated_text.count(']') > 1 :
                     return render_template('result.html', result = "We can not solve complex equations for now !")
-                if any(i in formated_text for i in ["import","exec","compile","tesseract","chr","os","write"]):
+                if any(i in formated_text for i in ["import","exec","compile","tesseract","chr","os","write","sleep"]):
                     return render_template('result.html', result = "We can not understand your equation !")
                 if len(formated_text) > 15:
                     return render_template('result.html', result = "We can not solve complex equations for now !")
