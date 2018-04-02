@@ -9,6 +9,7 @@ RUN mkdir -p /var/www
 COPY www/ /var/www/
 
 WORKDIR /var/www/
+RUN chown -R python-runner:python-runner .
 USER python-runner
 EXPOSE 5000
 

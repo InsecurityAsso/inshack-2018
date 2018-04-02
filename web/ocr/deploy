@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run -d --name ocr -p 5000:5000 registry.dev.insecurity-insa.fr/insecurity/ocr
+docker run -it --rm --name ocr -p 5000:5000 registry.dev.insecurity-insa.fr/insecurity/ocr
