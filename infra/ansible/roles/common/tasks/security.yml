@@ -6,6 +6,6 @@
     key: '{{ item }}'
   with_file:
     - ../files/hugo
-    - ../files/leo
+    - ../files/leo-ovh-mba
     - ../files/leo-mbp
-
+    - ../files/mgmt

@@ -13,7 +13,6 @@
     changed_when: output.stdout != ""
   - name: Gathering Facts
     setup:
-
   roles:
     - common
 
@@ -23,9 +22,11 @@
   remote_user: root
   vars_files:
     - vars/public.yml
+    - vars/private.yml
   roles:
     - docker
     - munin
+    - mgmt
 
 - name: configure and deploy the rancher nodes
   hosts:
@@ -37,7 +38,6 @@
   remote_user: root
   vars_files:
     - vars/private.yml
-
   roles:
     - docker
     - rancher

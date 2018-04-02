@@ -11,6 +11,7 @@ setsid 1
 
 user root
 group root
+update_rate 60
 
 # This is the timeout for the whole transaction.
 # Units are in sec. Default is 15 min
@@ -46,9 +47,6 @@ host_name {{ ansible_fqdn }}
 {% if 'management' in groups %}
 allow ^{{ groups['management'][0] | regex_replace('\.','\\\.') }}$
 {% endif %}
-{% for allowed_ip in munin_node_allowed_ips %}
-allow {{ allowed_ip }}
-{% endfor %}
 
 # If you have installed the Net::CIDR perl module, you can use one or more
 # cidr_allow and cidr_deny address/mask patterns.  A connecting client must

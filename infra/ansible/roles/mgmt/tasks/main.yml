@@ -1,0 +1,66 @@
+---
+- name: Add ansible apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 93C4A3FD7BB9C367
+    state: present
+
+- name: Add ansible repository
+  apt_repository:
+    repo: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main"
+    state: present
+    update_cache: yes
+
+- name: Install management packages
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - ansible
+    - unzip
+    - git
+
+- name: Check terraform install
+  stat:
+    path: /usr/local/bin/terraform
+  register: is_terraform_installed
+
+- name: Unpack terraform binary
+  unarchive:
+    src: https://releases.hashicorp.com/terraform/0.11.5/terraform_0.11.5_linux_amd64.zip
+    dest: /usr/local/bin/
+    mode: 755
+    remote_src: true
+  when: is_terraform_installed.stat.exists == False
+
+- name: Check terraform-inventory install
+  stat:
+    path: /usr/local/bin/terraform-inventory
+  register: is_terraform_inventory_installed
+
+- name: Unpack terraform-inventory binary
+  unarchive:
+    src: https://github.com/adammck/terraform-inventory/releases/download/v0.6.1/terraform-inventory_v0.6.1_linux_amd64.zip
+    dest: /usr/local/bin/
+    mode: 755
+    remote_src: true
+  when: is_terraform_inventory_installed.stat.exists == False
+
+- name: Install SSH public key
+  copy:
+    content: "{{ mgmt_pub_key }}"
+    dest: /root/.ssh/id_rsa.pub
+
+- name: Install SSH private key
+  copy:
+    content: "{{ mgmt_priv_key }}"
+    dest: /root/.ssh/id_rsa
+    mode: 0600
+
+- name: Fetch inshack-2018 repository
+  git:
+    repo: ssh://git@github.com/HugoDelval/inshack-2018
+    dest: /root/inshack-2018
+    clone: yes
+    update: no
+    ssh_opts: "-o StrictHostKeyChecking=no"

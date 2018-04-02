@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export ANSIBLE_HOST_KEY_CHECKING=false
+
+cd ../terraform
+ansible-playbook --vault-id ../ansible/vault-password --inventory-file=$(which terraform-inventory) ../ansible/site.yml
