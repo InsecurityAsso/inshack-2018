@@ -63,6 +63,7 @@ def choose_url():
 
 
 def fetch():
+    # Hit local flask server
     conn = HTTPConnection(fetcher_service, 8888)
     options = []
     for conf in fetch_options.values():

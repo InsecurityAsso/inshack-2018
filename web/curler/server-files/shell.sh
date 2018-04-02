@@ -25,5 +25,5 @@ echo "2.."
 sleep 1
 echo "1.."
 sleep 1
-timeout --kill-after=122 120 python3 wrapper.py ${name}
+su -c "timeout --kill-after=122 120 python3 wrapper.py ${name}" curler
 docker kill ${name} >/dev/null 2>&1 || exit 0
