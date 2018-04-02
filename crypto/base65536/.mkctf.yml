@@ -7,9 +7,8 @@ enabled: true
 flag: INSA{655e6_is_T0_Much}
 name: base65536
 parameters:
-  port: 5001
   exploit:
-    url: http://localhost:5001/
+    url: http://localhost:5000/
 points: 500
 slug: base65536
 standalone: false

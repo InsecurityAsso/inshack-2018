@@ -1,14 +1,18 @@
 FROM python:latest
 
+RUN pip install flask gunicorn ruamel.yaml && \
+    useradd python-runner
+
 RUN mkdir -p /var/www
 
 COPY server-files/ /var/www/
-
-RUN pip install flask && \
-    useradd python-runner
+COPY .mkctf.yml /var/www/
 
 WORKDIR /var/www/
+RUN chown -R python-runner:python-runner /var/www/
 
 USER python-runner
 
-CMD ["python","/var/www/server.py"]
+EXPOSE 5000
+
+CMD gunicorn -b 0.0.0.0:5000 --access-logfile=- --error-logfile=- server:app

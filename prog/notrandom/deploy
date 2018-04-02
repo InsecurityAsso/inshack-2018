@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run -it -d --name random -p 5001:2004 random
+docker run -it -d --rm --name random -p 5001:2004 random
