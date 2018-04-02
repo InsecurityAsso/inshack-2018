@@ -2,3 +2,4 @@ rancher_node: true
 rancher_env: chal
 munin_node: true
 munin_server: false
+rate_limiting: true

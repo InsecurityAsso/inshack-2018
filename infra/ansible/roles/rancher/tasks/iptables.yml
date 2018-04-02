@@ -1,0 +1,56 @@
+---
+# tasks specific to rancher nodes
+
+- name: Copy iptables-custom script
+  copy:
+    src: iptables-custom
+    dest: /etc/init.d/iptables-custom
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart iptables-custom service
+
+- name: Create iptables-custom conf dir
+  file:
+    path: /etc/iptables-custom
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+  notify: restart iptables-custom service
+
+- name: Copy iptables-custom rules
+  template:
+    src: iptables-custom-rules.j2
+    dest: /etc/iptables-custom/iptables-custom
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart iptables-custom service
+
+- name: Copy iptables-custom systemd
+  copy:
+    src: iptables-custom.service
+    dest: /etc/systemd/system/iptables-custom.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart iptables-custom service
+
+- name: Copy iptables-rancher daemon
+  copy:
+    src: iptables-rancher.py
+    dest: /usr/bin/iptables-rancher
+    owner: root
+    group: root
+    mode: 0750
+  notify: restart iptables-rancher service
+
+- name: Copy iptables-rancher systemd
+  copy:
+    src: iptables-rancher.service
+    dest: /etc/systemd/system/iptables-rancher.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart iptables-rancher service

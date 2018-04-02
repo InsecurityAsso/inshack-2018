@@ -1,0 +1,6 @@
+-t nat -N RATE_LIMIT
+-t nat -N BLACKHOLE
+-t nat -A BLACKHOLE -p all -j DNAT --to 0.0.0.1
+-t nat -A RATE_LIMIT -i ens3 -p tcp -m multiport --dports 80,443,10000:20000 -m state --state NEW -m recent --set
+-t nat -A RATE_LIMIT -i ens3 -p tcp -m multiport --dports 80,443 -m state --state NEW -m recent --update --seconds 5 --hitcount 60 -j BLACKHOLE
+-t nat -A RATE_LIMIT -i ens3 -p tcp -m multiport --dports 10000:20000 -m state --state NEW -m recent --update --seconds 10 --hitcount 10 -j BLACKHOLE

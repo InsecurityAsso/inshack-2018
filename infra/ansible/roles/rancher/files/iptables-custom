@@ -1,0 +1,72 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          iptables-custom
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Install some iptables custom rules
+# Description:       Install some iptables custom rules
+### END INIT INFO
+
+start()
+{
+    iptables -t nat -F RATE_LIMIT || true
+    iptables -t nat -F BLACKHOLE || true
+    iptables -t nat -X RATE_LIMIT || true
+    iptables -t nat -X BLACKHOLE || true
+
+    # 0 = success, 1 = failure
+    RESULT=0
+
+    # Add rules
+    for i in `ls /etc/iptables-custom/* 2> /dev/null` ; do
+        cat $i | while read line ; do
+            [ -z "$line" ] && continue
+            echo $line
+            echo -ne $REDCOLOR
+            iptables $line || RESULT=1 ;
+            echo -ne $COLOROFF
+        done
+    done
+    echo
+
+    return $RESULT ;
+}
+
+stop()
+{
+    iptables -t nat -F RATE_LIMIT || true
+    iptables -t nat -F BLACKHOLE || true
+    iptables -t nat -X RATE_LIMIT || true
+    iptables -t nat -X BLACKHOLE || true
+
+    # 0 = success, 1 = failure
+    RESULT=0
+
+    return $RESULT ;
+}
+
+case "$1" in
+  start)
+        echo "Starting iptable-custom: "
+        start && exit 0 ;
+        echo -e "${REDCOLOR}failed${COLOROFF}"
+        ;;
+  stop)
+        echo "Stopping iptable-custom: "
+        stop && exit 0 ;
+        echo -e "${REDCOLOR}failed${COLOROFF}"
+        ;;
+  restart)
+        echo "Restarting iptable-custom: "
+        stop && start && exit 0 ;
+        echo -e "${REDCOLOR}failed${COLOROFF}"
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

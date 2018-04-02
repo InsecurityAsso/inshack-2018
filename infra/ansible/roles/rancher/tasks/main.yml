@@ -1,3 +1,6 @@
 ---
 - include_tasks: node.yml
   when: rancher_node
+
+- include_tasks: iptables.yml
+  when: rate_limiting

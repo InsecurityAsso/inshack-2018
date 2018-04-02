@@ -19,6 +19,7 @@
     - ansible
     - unzip
     - git
+    - dnsutils
 
 - name: Check terraform install
   stat:

@@ -7,7 +7,7 @@ tools:
 it (by spawning machines automatically)
 - **Ansible**: deploys all the software stack on a server after it has been
 deployed by *Terraform*
-- `ansible-playbook`: a Go app that converts the *Terraform* state file into an
+- `terraform-inventory`: a Go app that converts the *Terraform* state file into an
 *Ansible* playbook
 
 

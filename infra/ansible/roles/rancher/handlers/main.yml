@@ -1,0 +1,14 @@
+---
+- name: restart iptables-custom service
+  systemd:
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+    name: iptables-custom
+
+- name: restart iptables-rancher service
+  systemd:
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+    name: iptables-rancher

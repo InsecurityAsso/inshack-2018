@@ -1,0 +1,9 @@
+[Unit]
+Description=iptables-custom
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /etc/init.d/iptables-custom restart
+
+[Install]
+WantedBy=default.target

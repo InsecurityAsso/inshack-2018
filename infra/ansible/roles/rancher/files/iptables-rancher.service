@@ -1,0 +1,10 @@
+[Unit]
+Description=iptables-rancher
+
+[Service]
+Type=simple
+PIDFile=/tmp/iptables-rancher.pid
+ExecStart=/usr/bin/python3 /usr/bin/iptables-rancher
+
+[Install]
+WantedBy=default.target
