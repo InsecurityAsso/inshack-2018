@@ -4,7 +4,6 @@ name="curler-pwned-${rndm}"
 echo "Launching your app.."
 timeout --kill-after=132 130 docker run \
         --rm \
-        --net=curler \
         --name=${name} \
         --cpus=.1 \
         --memory=64m \

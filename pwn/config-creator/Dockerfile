@@ -10,8 +10,8 @@ RUN echo '* * * * * root docker kill $(docker ps -f "name=config-creator-pwned" 
     echo >> /etc/crontab
 
 
-EXPOSE 54321
+EXPOSE 10000
 
 CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.dev.insecurity-insa.fr && \
     service cron start && \
-    tcpserver -v -c 300 -t 3 0.0.0.0 54321 /shell.sh
+    tcpserver -v -c 300 -t 3 0.0.0.0 10000 /shell.sh

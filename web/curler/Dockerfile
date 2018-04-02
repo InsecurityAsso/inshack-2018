@@ -19,8 +19,8 @@ RUN chown -R curler /srv/app/
 
 WORKDIR /srv/app
 
-EXPOSE 4444
+EXPOSE 10001
 
 CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.dev.insecurity-insa.fr && \
     service cron start && \
-    tcpserver -v -c 300 -t 3 0.0.0.0 4444 /shell.sh
+    tcpserver -v -c 300 -t 3 0.0.0.0 10001 /shell.sh
