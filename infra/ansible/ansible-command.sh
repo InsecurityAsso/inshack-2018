@@ -32,4 +32,4 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 echo -e "Running command on GROUP=${GROUP}"
 
 cd ../terraform
-ansible --vault-id ../ansible/vault-password --inventory-file=/Users/lmartine/.homebrew/bin/terraform-inventory -u root -f 10 -m raw -a "$(printf '%s ' "${POSITIONAL[@]}")" $GROUP
+ansible --vault-id ../ansible/vault-password --inventory-file=$(which terraform-inventory) -u root -f 10 -m raw -a "$(printf '%s ' "${POSITIONAL[@]}")" $GROUP
