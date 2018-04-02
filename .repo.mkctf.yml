@@ -11,7 +11,7 @@ categories:
 - pwn
 - re
 - web
-- quest
+- cracking
 directories:
   private:
   - server-files
