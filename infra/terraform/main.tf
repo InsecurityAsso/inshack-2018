@@ -174,14 +174,14 @@ resource "ovh_domain_zone_record" "dns-privileged-node" {
   ttl       = 120
   depends_on = ["openstack_compute_instance_v2.privileged-node"]
 }
-resource "ovh_domain_zone_record" "dns-privileged-lb" {
-  count     = "${var.privileged_node_count}"
-  zone      = "insecurity-insa.fr"
-  fieldtype = "CNAME"
-  subdomain = "privileged-lb.infra"
-  target    = "${format("privileged-node-%02d.infra", count.index + 1)}"
-  ttl       = 120
-}
+# resource "ovh_domain_zone_record" "dns-privileged-lb" {
+#   count     = "${var.privileged_node_count}"
+#   zone      = "insecurity-insa.fr"
+#   fieldtype = "CNAME"
+#   subdomain = "privileged-lb.infra"
+#   target    = "${format("privileged-node-%02d.infra", count.index + 1)}"
+#   ttl       = 120
+# }
 resource "ovh_domain_zone_record" "dns-chal-node" {
   count     = "${var.chal_node_count}"
   zone      = "insecurity-insa.fr"
@@ -191,12 +191,11 @@ resource "ovh_domain_zone_record" "dns-chal-node" {
   ttl       = 120
   depends_on = ["openstack_compute_instance_v2.chal-node"]
 }
-
-resource "ovh_domain_zone_record" "dns-chal-lb" {
-  count     = "${var.chal_node_count}"
-  zone      = "insecurity-insa.fr"
-  fieldtype = "CNAME"
-  subdomain = "chal-lb.infra"
-  target    = "${format("chal-node-%02d.infra", count.index + 1)}"
-  ttl       = 120
-}
+#resource "ovh_domain_zone_record" "dns-chal-lb" {
+#   count     = "${var.chal_node_count}"
+#   zone      = "insecurity-insa.fr"
+#   fieldtype = "CNAME"
+#   subdomain = "chal-lb.infra"
+#   target    = "${format("chal-node-%02d.infra", count.index + 1)}"
+#   ttl       = 120
+# }
