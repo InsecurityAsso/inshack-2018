@@ -12,6 +12,7 @@ g++ main.cpp -lcrypto -o tricky2 && zip tricky2.zip tricky2
 #include <signal.h>
 #include <iomanip>
 #include <sstream>
+#include <cstdlib>
 #include "openssl/sha.h"
 #include <iostream>
 #include <string>

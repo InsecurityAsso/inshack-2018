@@ -34,7 +34,7 @@ int main() {
 		return 42;
 	} else {
 		string pass;
-		cout << "Enter your flag :\n";
+		cout << "Enter your flag : ";
 		cin >> pass;
 		if (pass == stack_check() + '\n') { // INSA{CXX_1s_h4rd3r_f0r_st4t1c_4n4l1sys_wh3n_d3bugg3r_f41ls}
 			cout << "Correct but this is just the first one\nValidate with the flag" << endl;
