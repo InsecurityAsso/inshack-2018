@@ -8,7 +8,7 @@ Generate a kernel profile on a Debian Stretch 9 using linux kernel
 `4.9.0-6-amd64`.
 
 You can also use Wireshark on the packet capture to identify an exchange
-between to computers on a LAN.
+between two computers on a LAN.
 
 You can solve this challenge using multiple methods :
 

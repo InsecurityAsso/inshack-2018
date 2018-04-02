@@ -7,4 +7,4 @@ You can find everything [here](https://mega.nz/#!1ddgGKTB!Qf-BuTtP7FwsDuHAwmH5TJ
 
 Please find out what's wrong about these captures.
 
-Have fun !
+Have fun!
