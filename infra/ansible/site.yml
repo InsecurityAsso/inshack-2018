@@ -32,8 +32,7 @@
   hosts:
     - chal-node
     - privileged-node
-    - internal-node-01
-    - internal-node-02
+    - internal-node
     - internal-db-01
   remote_user: root
   vars_files:
