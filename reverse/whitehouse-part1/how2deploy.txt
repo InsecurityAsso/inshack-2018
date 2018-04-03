@@ -1,0 +1,3 @@
+Run the following command
+./white-house-insecurity "INSA{Soci4l_engin33ring_w0uld_h4ve_w0rked_t00_I_gu3ss}" 49ad54d46d2fee35287d419edecb7260
+with TCP wrapping. Also don't forget to change description.md of this chall to give the correct server IP and port. Bisou
