@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{xIU8t4Zs}
 name: Self Congratulation
 parameters: {}
-points: 500
+points: 100
 slug: self-congratulation
 standalone: true

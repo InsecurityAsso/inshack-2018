@@ -7,6 +7,6 @@ enabled: true
 flag: INSA{w0w_v1su4l_h4sh1ngz}
 name: Visual hashing - easy
 parameters: {}
-points: 500
+points: 100
 slug: visual-hashing-easy
 standalone: true
