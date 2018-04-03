@@ -238,6 +238,7 @@ class SerialNumberHandler(RequestHandler):
                               "{}".format(self.flag))
                 return
 
+            access_log.info("received secret is [{}] and saved_secret is [{}]; mismatch!")
             self.__reject("Wrong secret... Try again :)")
             return
 
