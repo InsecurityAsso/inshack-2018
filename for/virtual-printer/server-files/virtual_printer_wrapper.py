@@ -105,17 +105,38 @@ class PrintHandler(RequestHandler):
     ##
     def initialize(self, redis_host, redis_port):
         self.redis_addr = (redis_host, redis_port)
-    ##
-    ## @brief      { function_description }
-    ##
+
+    def __remote_ip(self):
+        """[summary]
+
+        [description]
+
+        Returns:
+            [type] -- [description]
+        """
+        return self.request.headers.get('X-Forwarded-For',
+                                        self.request.remote_ip)
+
     def __reject(self, reason):
+        """[summary]
+
+        [description]
+
+        Arguments:
+            reason {[type]} -- [description]
+        """
         self.set_status(400)    # I'm a teapot
         self.write({'reason': reason})
         self.finish()
-    ##
-    ## @brief      { function_description }
-    ##
+
     def __accept(self, data):
+        """[summary]
+
+        [description]
+
+        Arguments:
+            data {[type]} -- [description]
+        """
         if isinstance(data, str):
             data = data.encode()
         self.write(data)
@@ -124,7 +145,7 @@ class PrintHandler(RequestHandler):
     ## @brief      Saves a secret.
     ##
     async def __save_secret(self, secret):
-        key = 'vps-' + self.request.remote_ip
+        key = 'vps-' + self.__remote_ip()
         redis = await aioredis.create_redis(self.redis_addr, timeout=REDIS_TIMEOUT)
         access_log.info('adding: ({}, {})'.format(key, secret))
         await redis.set(key, secret, expire=30) # register secret
@@ -142,7 +163,7 @@ class PrintHandler(RequestHandler):
         img_data = files[0]['body']
 
         try:
-            result = print_img(img_data, self.request.remote_ip)
+            result = print_img(img_data, self.__remote_ip())
         except Exception as e:
             access_log.exception("An exception occurred...")
             self.__reject("[print_img:exception] service failed to process "
@@ -183,17 +204,38 @@ class SerialNumberHandler(RequestHandler):
     def initialize(self, redis_host, redis_port, flag):
         self.redis_addr = (redis_host, redis_port)
         self.flag = flag
-    ##
-    ## @brief      { function_description }
-    ##
+
+    def __remote_ip(self):
+        """[summary]
+
+        [description]
+
+        Returns:
+            [type] -- [description]
+        """
+        return self.request.headers.get('X-Forwarded-For',
+                                        self.request.remote_ip)
+
     def __reject(self, reason):
+        """[summary]
+
+        [description]
+
+        Arguments:
+            reason {[type]} -- [description]
+        """
         self.set_status(400)    # I'm a teapot
         self.write({'reason': reason})
         self.finish()
-    ##
-    ## @brief      { function_description }
-    ##
+
     def __accept(self, data):
+        """[summary]
+
+        [description]
+
+        Arguments:
+            data {[type]} -- [description]
+        """
         if isinstance(data, str):
             data = data.encode()
         self.write(data)
@@ -202,7 +244,7 @@ class SerialNumberHandler(RequestHandler):
     ## @brief      Loads a secret.
     ##
     async def __load_secret(self):
-        key = 'vps-' + self.request.remote_ip
+        key = 'vps-' + self.__remote_ip()
         redis = await aioredis.create_redis(self.redis_addr, timeout=REDIS_TIMEOUT)
         secret = await redis.get(key)
         redis.close()
@@ -232,7 +274,7 @@ class SerialNumberHandler(RequestHandler):
                 return
 
             if secret == saved_secret:
-                access_log.info("{} gets a flag!".format(self.request.remote_ip))
+                access_log.info("{} gets a flag!".format(self.__remote_ip()))
                 self.__accept("Good job ! DO NOT LEAK SECRET FILES BY "
                               "PRINTING THEM ! You can validate with: "
                               "{}".format(self.flag))
@@ -260,12 +302,12 @@ class SerialNumberHandler(RequestHandler):
 ##
 def make_app(redis_host, redis_port, flag, debug):
     return Application([
-        (r"/", MainHandler),
-        (r"/print", PrintHandler, dict(redis_host=redis_host,
-                                       redis_port=redis_port)),
         (r"/serial-number", SerialNumberHandler, dict(redis_host=redis_host,
                                                       redis_port=redis_port,
-                                                      flag=flag))
+                                                      flag=flag)),
+        (r"/print", PrintHandler, dict(redis_host=redis_host,
+                                       redis_port=redis_port)),
+        (r"/", MainHandler)
     ], debug=debug)
 #===============================================================================
 # SCRIPT
