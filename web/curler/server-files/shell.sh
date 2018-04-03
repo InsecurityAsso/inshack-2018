@@ -12,7 +12,7 @@ timeout --kill-after=132 130 docker run \
         --ulimit fsize=10000:10000 \
         --ulimit nofile=1024:2048 \
         --ulimit nice=1 \
-        registry.dev.insecurity-insa.fr/insecurity/curler-pwned &
+        registry.infra.insecurity-insa.fr/insecurity/curler-pwned &
 
 echo "5.."
 sleep 1

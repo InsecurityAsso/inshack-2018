@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-
-python2 src/server.py
+docker run -it --rm -p 5000:5000 registry.infra.insecurity-insa.fr/insecurity/math-killer

@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-
-exit 2
+docker run -it --rm -p 5000:5000 registry.infra.insecurity-insa.fr/insecurity/math-killer

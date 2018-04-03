@@ -14,7 +14,7 @@ RUN echo "/shell.sh" >> /etc/shells && \
 
 EXPOSE 22
 
-CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.dev.insecurity-insa.fr && \
+CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.infra.insecurity-insa.fr && \
     service cron start && \
     mkdir -p /var/run/sshd && \
     /usr/sbin/sshd -e -D -o PermitRootLogin=yes

@@ -9,6 +9,6 @@ timeout --kill-after=122 120 docker run \
         --ulimit fsize=10000:10000 \
         --ulimit nofile=1024:2048 \
         --ulimit nice=1 \
-        registry.dev.insecurity-insa.fr/insecurity/sudo-pwned
+        registry.infra.insecurity-insa.fr/insecurity/sudo-pwned
 
 docker kill ${name} >/dev/null 2>&1 || exit 0

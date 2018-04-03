@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run -it --rm -p 5000:5000 registry.dev.insecurity-insa.fr/insecurity/base65536
+docker run -it --rm -p 5000:5000 registry.infra.insecurity-insa.fr/insecurity/base65536

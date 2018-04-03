@@ -18,6 +18,6 @@ WORKDIR /srv/app/
 
 EXPOSE 80
 
-CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.dev.insecurity-insa.fr && \
+CMD docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD} registry.infra.insecurity-insa.fr && \
     service cron start && \
     ./dna_decoder_wrapper.py --config .mkctf.yml
