@@ -350,9 +350,9 @@ void registerPresident()
     char president[256];
     xread(president, 255);
 
-    if(!strcmp(president,"admin"))
+    if(!strcmp(president,"administrator"))
     {
-        printf("Error : Cannot register as admin.\n");
+        printf("Error : Cannot register as administrator.\n");
         return;
     }
 
@@ -448,9 +448,9 @@ void forgotCodes()
 
     char president[256];
     strcpy(president,data+1);
-    if(!strcmp(president,"admin"))
+    if(!strcmp(president,"administrator"))
     {
-        printf("Welcome admin ! The override key is %s\n", masterkey);
+        printf("Welcome administrator ! The override key is %s\n", masterkey);
     }
     else
     {
