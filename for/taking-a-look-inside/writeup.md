@@ -16,7 +16,8 @@ You can solve this challenge using multiple methods :
    extract the **plaintext source code and AES key from nano process 
    address space** using *strings*/*grep*,
 2. **retrieve and reverse python bytecode** from the RAM dump then decrypt 
-   network packets using the key, I expected you to work on [pyREtic](https://github.com/MyNameIsMeerkat/pyREtic) 
+   network packets using the key, I expected you to work on 
+   [pyrasite](https://github.com/lmacken/pyrasite) 
    to perform the same task on a RAM dump instead of live RAM,
 3. but you could also try to **break the AES-ECB encryption** of the 
    network capture (the hardest way though, because you didn't know 
