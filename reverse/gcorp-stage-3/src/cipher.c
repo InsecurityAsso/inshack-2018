@@ -40,7 +40,8 @@ static const uint32_t gdelta=0x9E3779B9;
 // FUNCTIONS
 //==============================================================================
 //------------------------------------------------------------------------------
-//
+// xtea_encrypt
+//     taken from https://en.wikipedia.org/wiki/XTEA
 //------------------------------------------------------------------------------
 void xtea_encrypt(uint rounds, uint32_t v[2], uint32_t const key[4]) 
 {
@@ -55,7 +56,8 @@ void xtea_encrypt(uint rounds, uint32_t v[2], uint32_t const key[4])
 }
 #ifndef NO_DECRYPTION
 //------------------------------------------------------------------------------
-//
+// xtea_decrypt
+//     taken from https://en.wikipedia.org/wiki/XTEA
 //------------------------------------------------------------------------------
 void xtea_decrypt(uint rounds, uint32_t v[2], uint32_t const key[4]) 
 {
@@ -70,7 +72,7 @@ void xtea_decrypt(uint rounds, uint32_t v[2], uint32_t const key[4])
 }
 #endif /* NO_DECRYPTION */
 //------------------------------------------------------------------------------
-//
+// read_file_sz
 //------------------------------------------------------------------------------
 int read_file_sz(const char *fpath)
 {
@@ -82,7 +84,7 @@ int read_file_sz(const char *fpath)
     return s.st_size;
 }
 //------------------------------------------------------------------------------
-//
+// read_file
 //------------------------------------------------------------------------------
 int read_file(const char *fpath, uchar *buf, int qsz)
 {
@@ -97,7 +99,7 @@ int read_file(const char *fpath, uchar *buf, int qsz)
     return esz;
 }
 //------------------------------------------------------------------------------
-//
+// write_file
 //------------------------------------------------------------------------------
 int write_file(const char *fpath, const uchar *buf, int qsz)
 {
@@ -112,7 +114,7 @@ int write_file(const char *fpath, const uchar *buf, int qsz)
     return esz;
 }
 //------------------------------------------------------------------------------
-//  
+// generate_iv
 //------------------------------------------------------------------------------
 int generate_iv(uchar iv[8])
 {
@@ -123,7 +125,8 @@ int generate_iv(uchar iv[8])
     return 0;
 }
 //------------------------------------------------------------------------------
-//  in-place XOR operation
+// xor
+//     in-place XOR operation
 //------------------------------------------------------------------------------
 void xor(const uchar *m, uchar *d)
 {
@@ -133,7 +136,7 @@ void xor(const uchar *m, uchar *d)
     }
 }
 //------------------------------------------------------------------------------
-//
+// cbc_encrypt
 //------------------------------------------------------------------------------
 int cbc_encrypt(const uchar *k, int ksz, uchar *d, int dsz, const char *fpath) 
 {
@@ -169,7 +172,7 @@ int cbc_encrypt(const uchar *k, int ksz, uchar *d, int dsz, const char *fpath)
 }
 #ifndef NO_DECRYPTION
 //------------------------------------------------------------------------------
-//
+// cbc_decrypt
 //------------------------------------------------------------------------------
 int cbc_decrypt(const uchar *k, int ksz, uchar *d, int dsz, const char *fpath) 
 {
@@ -194,7 +197,7 @@ int cbc_decrypt(const uchar *k, int ksz, uchar *d, int dsz, const char *fpath)
 }
 #endif /* NO_DECRYPTION */
 //------------------------------------------------------------------------------
-//
+// usage
 //------------------------------------------------------------------------------
 int usage(const char *prog)
 {
