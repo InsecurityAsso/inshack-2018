@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+docker build -t registry.infra.insecurity-insa.fr/insecurity/notrandom .
+docker push registry.infra.insecurity-insa.fr/insecurity/notrandom

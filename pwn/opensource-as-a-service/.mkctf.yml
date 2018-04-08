@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: pwn
+enabled: true
+flag: INSA{1_l0v3_0p3n_SRC}
+name: OpenSource as a Service
+parameters: {}
+points: 500
+slug: opensource-as-a-service
+standalone: false

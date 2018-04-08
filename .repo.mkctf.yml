@@ -1,0 +1,35 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+categories:
+- bugbounty
+- crypto
+- for
+- misc
+- prog
+- pwn
+- re
+- web
+- cracking
+directories:
+  private:
+  - server-files
+  - exploit
+  - src
+  public:
+  - public-files
+files:
+  build: build
+  config:
+    challenge: .mkctf.yml
+  deploy: deploy
+  status: exploit/exploit
+  txt:
+  - writeup.md
+  - Dockerfile
+  - public-files/description.md
+flag:
+  prefix: INSA{
+  suffix: '}'
+name: INS'hAck 2018

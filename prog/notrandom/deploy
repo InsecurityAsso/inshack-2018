@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -it --rm --name random -p 10002:10002 registry.infra.insecurity-insa.fr/insecurity/notrandom

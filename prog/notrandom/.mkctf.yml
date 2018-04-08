@@ -1,0 +1,16 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: prog
+enabled: true
+flag: INSA{Why_w0ulD_U_Us3_b4s1c_r4nd0m}
+name: NotRandom
+parameters:
+  port: 10002
+  exploit:
+    host: notrandom.ctf.insecurity-insa.fr
+    port: 10002
+points: 200
+slug: notrandom
+standalone: false

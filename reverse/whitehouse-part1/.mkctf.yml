@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: reverse
+enabled: true
+flag: INSA{8c0165004d4ab5d6}
+name: White-House-InSecurity-Part1
+parameters: {}
+points: 100
+slug: whitehouse-part1
+standalone: false

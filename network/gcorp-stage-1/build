@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+>&2 echo "This challenge must be built using your fingers :/"
+>&2 echo "Steps:"
+>&2 echo "  1. start a vm"
+>&2 echo "  2. start wireshark on the host machine"
+>&2 echo "  3. put a netcat listener in the vm: $ nc -l -p10042."
+>&2 echo "  4. start a capture on the network between your host and vm. "
+>&2 echo "  5. use ./src/send.py <vm-ip> <vm-port> to upload files to the vm."
+>&2 echo "  6. stop & save the wireshark capture to public-files/exfil.pcap"
+exit 3  # notify manual

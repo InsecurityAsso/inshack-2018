@@ -1,0 +1,16 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: reverse
+enabled: true
+flag: INSA{4778b157c376f7a087f4974651c2d8bc66fe2f0ca0883cc93570803a7e067e6f}
+name: GCorp - Stage 4
+parameters:
+  exploit:
+    url: https://insecurity:LTjdgKjKSiHswkf0iOEl@gcorp-stage-4.ctf.insecurity-insa.fr
+    key: key.bin
+  port: 12042
+points: 300
+slug: gcorp-stage-4
+standalone: false

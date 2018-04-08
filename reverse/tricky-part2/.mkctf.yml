@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: reverse
+enabled: false
+flag: INSA{Y0u_sh0uld_kn0w_th4t_1_c4n_tr1ck_y0ur_d3bugg3r}
+name: Tricky-Part2
+parameters: {}
+points: 500
+slug: tricky-part2
+standalone: true

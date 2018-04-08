@@ -1,0 +1,3 @@
+#!/bin/bash
+docker build -t registry.infra.insecurity-insa.fr/insecurity/math-killer .
+docker push registry.infra.insecurity-insa.fr/insecurity/math-killer

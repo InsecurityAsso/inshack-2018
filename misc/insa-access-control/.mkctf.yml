@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: misc
+enabled: true
+flag: INSA{3ba90bbe5f985118}
+name: INSA Access Control
+parameters: {}
+points: 500
+slug: insa-access-control
+standalone: true

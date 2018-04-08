@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cat .mkctf.yml | shyaml get-value flag > server-files/flag.txt
+cp server-files/wrapper.py public-files/
+docker build -t registry.infra.insecurity-insa.fr/insecurity/curler .
+docker build -t registry-chal.infra.insecurity-insa.fr/insecurity/curler-pwned -f Dockerfile_pwned .
+docker push registry.infra.insecurity-insa.fr/insecurity/curler
+docker push registry-chal.infra.insecurity-insa.fr/insecurity/curler-pwned

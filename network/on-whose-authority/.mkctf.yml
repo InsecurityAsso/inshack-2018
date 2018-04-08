@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: network
+enabled: false
+flag: INSA{2f272cd8e3f6d2e26cd4c9c09a0d530c322cc572b80fa473e30c4be6d14395d6}
+name: On Whose Authority
+parameters: {}
+points: 0
+slug: on-whose-authority
+standalone: false

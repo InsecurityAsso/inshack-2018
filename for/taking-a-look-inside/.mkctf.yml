@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: for
+enabled: true
+flag: INSA{aa80467558a76019b99ecec7b4f6d0c7}
+name: Taking a look inside
+parameters: {}
+points: 500
+slug: taking-a-look-inside
+standalone: true

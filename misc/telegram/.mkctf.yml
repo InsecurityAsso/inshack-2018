@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: misc
+enabled: true
+flag: INSA{telegram_end_to_russia_to_end_encryption}
+name: Telegram
+parameters: {}
+points: 1
+slug: telegram
+standalone: true

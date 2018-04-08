@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: crypto
+enabled: true
+flag: INSA{Soci4l_engin33ring_w0uld_h4ve_w0rked_t00_I_gu3ss}
+name: White-House-InSecurity-Part2
+parameters: {}
+points: 100
+slug: whitehouse-part2
+standalone: true

@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: pwn
+enabled: true
+flag: INSA{dont_get_me_wrong_i_love_python36}
+name: Config Creator
+parameters: {}
+points: 300
+slug: config-creator
+standalone: false

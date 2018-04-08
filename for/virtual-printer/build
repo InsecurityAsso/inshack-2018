@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+docker build -t registry.infra.insecurity-insa.fr/insecurity/virtual-printer .
+docker push registry.infra.insecurity-insa.fr/insecurity/virtual-printer

@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: prog
+enabled: true
+flag: INSA{hctib}
+name: Visual hashing - hard
+parameters: {}
+points: 200
+slug: visual-hashing-hard
+standalone: true

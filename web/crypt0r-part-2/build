@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+docker build -t registry.infra.insecurity-insa.fr/insecurity/cryptor-part-2 .
+docker push registry.infra.insecurity-insa.fr/insecurity/cryptor-part-2
+

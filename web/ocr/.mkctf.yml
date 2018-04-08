@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: web
+enabled: true
+flag: INSA{0cr_L0ng}
+name: OCR
+parameters: {}
+points: 400
+slug: ocr
+standalone: false

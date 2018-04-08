@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -it --rm -p 18470:18470 registry.infra.insecurity-insa.fr/insecurity/whitehouse

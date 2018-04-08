@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+gcc src/ugly-as-fuck.c -O3 -s -o public-files/white-house-insecurity
+docker build -t registry.infra.insecurity-insa.fr/insecurity/whitehouse .
+docker push registry.infra.insecurity-insa.fr/insecurity/whitehouse

@@ -1,0 +1,15 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: for
+enabled: true
+flag: INSA{30880b4d7e6726f5614eb57d0c6d9e7aa23e9cbbae89a6c91aebb9d0352bc53b}
+name: Worm In Apple
+parameters:
+  exploit:
+    baseurl: https://insecurity:LTjdgKjKSiHswkf0iOEl@worm-in-apple.ctf.insecurity-insa.fr
+  port: 24123
+points: 500
+slug: worm-in-apple
+standalone: false

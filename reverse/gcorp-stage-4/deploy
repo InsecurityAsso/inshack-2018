@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run --rm -p 12042:12042 -it registry.infra.insecurity-insa.fr/insecurity/gcorp-stage-4

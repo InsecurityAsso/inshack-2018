@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: misc
+enabled: true
+flag: INSA{w0w_v1su4l_h4sh1ngz}
+name: Visual hashing - easy
+parameters: {}
+points: 100
+slug: visual-hashing-easy
+standalone: true

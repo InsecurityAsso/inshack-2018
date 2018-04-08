@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Infra
+.terraform
+terraform.tfstate*
+terraform.tfvars
+infra/ansible/vault-password
+infra/ansible/*.retry
+
+# Pour macOS : Personne n'est parfait ;-)
+*.DS_Store

@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: reverse
+enabled: true
+flag: INSA{wTf_JN4g@6UWwl$9uSM3J_LOL_i}
+name: Crypt0r part 3
+parameters: {}
+points: 500
+slug: crypt0r-part-3
+standalone: true

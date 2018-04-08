@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: misc
+enabled: true
+flag: INSA{OMG_you_actually_killed_math}
+name: Math killer - hard
+parameters: {}
+points: 500
+slug: math-killer-hard
+standalone: true

@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: pwn
+enabled: true
+flag: INSA{am_I_2_quick_4_U?}
+name: Sudo
+parameters: {}
+points: 500
+slug: sudo
+standalone: false

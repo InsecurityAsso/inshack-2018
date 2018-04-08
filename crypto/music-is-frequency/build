@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+cat .mkctf.yml | shyaml get-value flag > src/flag.txt
+cd src
+./encrypt.py
+cd -
+zip public-files/music-is-frequency.zip src/flag.enc src/privatekey.bin  public-files/frere_jacques.pdf

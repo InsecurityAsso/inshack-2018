@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: web
+enabled: true
+flag: INSA{M4k3_My_F1l3s_Gr3at_Aga1n}
+name: Crypt0r part 2
+parameters: {}
+points: 500
+slug: crypt0r-part-2
+standalone: false

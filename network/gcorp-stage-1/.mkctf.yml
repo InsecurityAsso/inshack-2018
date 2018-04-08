@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: network
+enabled: true
+flag: INSA{c1807a0b6d7713274d7bf3c6477562ac47570e452f77b7d202b81e149172d6a7}
+name: GCorp - Stage 1
+parameters: {}
+points: 200
+slug: gcorp-stage-1
+standalone: true

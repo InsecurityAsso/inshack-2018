@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo -n DOCKER_PASSWORD? ; read DOCKER_PASSWORD
+docker run -e DOCKER_PASSWORD=${DOCKER_PASSWORD} -e DOCKER_USER=insecurity -v /var/run/docker.sock:/var/run/docker.sock -it --rm -p 12142:12142 registry.infra.insecurity-insa.fr/insecurity/gcorp-stage-2

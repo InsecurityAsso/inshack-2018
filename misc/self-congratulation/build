@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+cd src/ && python3 encode-flag.py
+mv logo_inshack_2018.png ../public-files/

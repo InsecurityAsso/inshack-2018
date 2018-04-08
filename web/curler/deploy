@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+echo -n DOCKER_PASSWORD? ; read DOCKER_PASSWORD
+docker network rm curler
+docker network create curler
+docker run --net curler -e DOCKER_PASSWORD=${DOCKER_PASSWORD} -e DOCKER_USER=insecurity -v /var/run/docker.sock:/var/run/docker.sock -p 10001:10001 --rm -it registry.infra.insecurity-insa.fr/insecurity/curler

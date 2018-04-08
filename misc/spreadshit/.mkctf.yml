@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: misc
+enabled: true
+flag: INSA{3cf6463910edffb0}
+name: Spreadshit
+parameters: {}
+points: 50
+slug: spreadshit
+standalone: true

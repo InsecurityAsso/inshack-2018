@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+>&2 echo "not implemented."
+exit 4

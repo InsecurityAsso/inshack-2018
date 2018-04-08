@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cat .mkctf.yml | shyaml get-value flag > server-files/flag.txt
+gcc src/main.c -o server-files/sudo -lssl -lcrypto
+strip -s server-files/sudo
+cp server-files/sudo public-files/sudo
+docker build -t registry.infra.insecurity-insa.fr/insecurity/sudo .
+docker build -t registry-chal.infra.insecurity-insa.fr/insecurity/sudo-pwned -f Dockerfile_pwned .
+docker push registry.infra.insecurity-insa.fr/insecurity/sudo
+docker push registry-chal.infra.insecurity-insa.fr/insecurity/sudo-pwned

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -p 5000:5000 --rm -it registry.infra.insecurity-insa.fr/insecurity/cryptor-part-2

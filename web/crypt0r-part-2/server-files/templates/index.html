@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>.:: Crypt0r Secure Payment Plateform ::.</title>
+  <meta name="description" content="INSHACK CTF - Crypt0r Challenge Part 2">
+  <meta name="author" content="OVH SAS">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+<!-- <h1>I know you {{ name }}!</h1>  -->
+  <div class="container">
+      <h3>.:: Crypt0r ::.</h3>
+      <h4>Secure Payment Platform</h4>
+
+      <div class="box">
+        <p>In order to get back your files, you have to pay a given amount of <b>INShAcoins</b> for each decryption.</p>
+        <p>
+            To do so, please fill the form below with <em>your personal key</em> and click on the offer you want to pay for:
+        </p>
+        <ul>
+	    <li><strong>Basic offer</strong>: it does cost only 5 coins and will give you back half of your files.</li>
+	    <li><strong>Premium offer</strong>: it does cost 500 coins and will give you back all your files.</li>
+        </ul>
+        <p>
+            <em>Note:</em> You currently have <b>{{ insa_coins }} INShAcoins</b>
+        </p>
+      </div>
+
+      <div class="box">
+	<form method="POST" action="pay?cost=5&offer=basic">
+           <input type="text" name="personnal_key" placeholder="Your personal key" autofocus="true"> <br>
+           <input type="submit" value="Basic offer">
+	</form>
+	<form method="POST" action="pay?cost=500&offer=premium">
+           <input type="submit" value="Premium offer">
+	</form>
+      </div>
+
+      <img src="images/pci-dss.png" alt="pci-dss">
+  </div>
+  <!-- TODO: delete sources from `src-code` directory  -->
+  <!-- Edit: should be ok now -->
+</body>
+</html>

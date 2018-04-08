@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+docker build -t registry.infra.insecurity-insa.fr/insecurity/base65536 .
+docker push registry.infra.insecurity-insa.fr/insecurity/base65536

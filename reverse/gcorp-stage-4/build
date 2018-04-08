@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+docker build -t registry.infra.insecurity-insa.fr/insecurity/gcorp-stage-4 .
+docker push registry.infra.insecurity-insa.fr/insecurity/gcorp-stage-4

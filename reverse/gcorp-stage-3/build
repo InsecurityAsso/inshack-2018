@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+FLAG=$(grep 'flag:' .mkctf.yml) make chall -C src/
+cp src/stage_3_storage.zip ../../pwn/gcorp-stage-2/server-files/
+>&2 echo "/\!\\ You must redeploy gcorp-stage-2 /\!\\"
+exit 3 # MANUAL action required

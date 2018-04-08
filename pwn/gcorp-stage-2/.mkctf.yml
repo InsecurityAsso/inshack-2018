@@ -1,0 +1,15 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: pwn
+enabled: true
+flag: INSA{1fb977db25976d7e1a0fb713383de1cea90b2d15b4173708d867be3793571ed9}
+name: GCorp - Stage 2
+parameters:
+  exploit:
+    url: https://insecurity:LTjdgKjKSiHswkf0iOEl@gcorp-stage-2.ctf.insecurity-insa.fr/
+  port: 80
+points: 500
+slug: gcorp-stage-2
+standalone: false

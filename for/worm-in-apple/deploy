@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run --rm -p 24123:24123 -it registry.infra.insecurity-insa.fr/insecurity/worm-in-apple

@@ -1,0 +1,12 @@
+#
+# This file was generated using mkctf utility. Do not edit it manually unless
+# you know exactly what you're doing. #PEBCAK
+#
+category: web
+enabled: false
+flag: INSA{s3cr3t_l0cat10n}
+name: crimemail
+parameters: {}
+points: 100
+slug: crimemail
+standalone: false

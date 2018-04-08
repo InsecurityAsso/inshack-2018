@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cat .mkctf.yml | shyaml get-value flag > server-files/flag.txt
+docker build -t registry.infra.insecurity-insa.fr/insecurity/config-creator .
+docker build -t registry-chal.infra.insecurity-insa.fr/insecurity/config-creator-pwned -f Dockerfile_pwned .
+docker push registry.infra.insecurity-insa.fr/insecurity/config-creator
+docker push registry-chal.infra.insecurity-insa.fr/insecurity/config-creator-pwned
