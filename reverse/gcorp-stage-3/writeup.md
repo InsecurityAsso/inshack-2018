@@ -10,7 +10,7 @@ you want to do with this unreadable file named `emergency_override.enc`.
 
 Just reverse crypt and find out that it is using XTEA algorithm and CBC chaining mode.
 
-Code the decryption program (an example is provided in `exploit/exploit`).
+Code the decryption program (an example is provided [here](https://github.com/HugoDelval/inshack-2018/blob/master/reverse/gcorp-stage-3/src/cipher.c#L60)).
 
 Decrypt the file.
 
