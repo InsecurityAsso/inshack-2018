@@ -1,8 +1,7 @@
 # Self-congratulation
 
-Full write-up to come on https://zoug.top
+Original challenge was really to hard to solve so we made a hotfix during the CTF.
 
-The flag is hidden in our logo. You'll notice a weird black and white symbol on the upper left, which is just the flag encoded in ASCII and displayed as 1s and 0s.
+The picture was supposed to be the logo inside the ctf website, in the frontpage, but because of the hotfix we give it directly, sorry for people who looked for something during the first hours.
 
-So you just need to code something (or even do it by hand) to get the 1s and 0s back from the symbol, then turn the resulting binary sequence into ascii text.
-
+You could notice a small shape with black and white pixels, the point was to traduce this into 0 and 1 and group it by 8. Then it was just converting this groups to ascii characters to get the flag.
